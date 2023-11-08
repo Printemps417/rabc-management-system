@@ -6,7 +6,13 @@ bin-release/
 
 # Other files and folders
 .settings/
-
+.DS_Store
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+**/*.log
 # Executables
 *.swf
 *.air
