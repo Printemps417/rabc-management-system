@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.rabc_backend.mapper.AllocateMapper">
+
+    <!-- Delete roles by username -->
+    <delete id="deleteRolesByUsername">
+        DELETE FROM user_role WHERE user_name = #{user_name}
+    </delete>
+
+    <!-- Allocate roles for a user -->
+    <insert id="allocateRoles">
+        INSERT INTO user_role (user_name, role_name) VALUES ( #{user_name}, #{role_name});
+    </insert>
+
+    <!-- Get roles by username -->
+    <select id="getRolesByUsername" resultType="String">
+        SELECT role_name FROM user_role WHERE user_name = #{user_name}
+    </select>
+
+    <!-- Delete permissions by role name -->
+    <delete id="deletePermissionsByRoleId">
+        DELETE FROM role_permission WHERE role_name = #{role_name}
+    </delete>
+
+    <!-- Allocate permissions for a role -->
+    <insert id="allocatePermissions">
+        INSERT INTO role_permission (role_name,permission_name) VALUES (#{role_name}, #{permission_name});
+    </insert>
+
+    <!-- Get permissions by role name -->
+    <select id="getPermissionsByRoleName" resultType="String">
+        SELECT permission_name FROM role_permission WHERE role_name = #{role_name}
+    </select>
+
+</mapper>
