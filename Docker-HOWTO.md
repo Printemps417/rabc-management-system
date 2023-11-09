@@ -1,13 +1,13 @@
-# 使用Docker Compose部署
+# 使用 Docker Compose 部署
 
-## 下载ssadmin-server源码
+## 下载 rabc_backend 源码
 
 ```bash
 git clone https://gitee.com/OSABC/ssadmin
 cd ssadmin/
 ```
 
-## 创建maven缓存volume
+## 创建 maven 缓存 volume
 
 **在同一台机器上，只需要执行一次！**
 
@@ -16,12 +16,12 @@ cd ssadmin/
 docker volume create --name ssadmin-maven-repo
 ```
 
-## 通过容器构建jar包
+## 通过容器构建 jar 包
 
 ```bash
 docker run -it --rm --name ssadmin-maven \
     -v ssadmin-maven-repo:/root/.m2 \
-    -v $PWD/ssadmin-server:/usr/src/mymaven \
+    -v $PWD/rabc_backend:/usr/src/mymaven \
     -w /usr/src/mymaven \
     maven:3.8.4-jdk-8 mvn clean install package -e '-Dmaven.test.skip=true'
 ```
@@ -31,7 +31,7 @@ docker run -it --rm --name ssadmin-maven \
 ```bash
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary for SSAdmin 基于RBAC的后台管理系统 1.0:
-[INFO] 
+[INFO]
 [INFO] SSAdmin 基于RBAC的后台管理系统 .............................. SUCCESS [ 12.837 s]
 [INFO] ssadmin-common ..................................... SUCCESS [02:37 min]
 [INFO] ssadmin-module-security ............................ SUCCESS [  2.930 s]
@@ -82,7 +82,7 @@ docker-compose logs
 
 ### 删除已经初始化的数据库卷
 
-初始化脚本仅在数据库第一次初始化时运行。如果你需要重新运行初始化脚本，你可以删除现有的数据卷，这样MySQL在下一次启动时会认为它是第一次启动并运行这些脚本。
+初始化脚本仅在数据库第一次初始化时运行。如果你需要重新运行初始化脚本，你可以删除现有的数据卷，这样 MySQL 在下一次启动时会认为它是第一次启动并运行这些脚本。
 
 警告：**这将删除现有的所有数据库数据**，请谨慎操作！
 
@@ -106,7 +106,7 @@ docker exec -it ssadmin-mysql bash
 mysql -u root -p
 ```
 
-### CentOS8安装Docker及Docker-compose
+### CentOS8 安装 Docker 及 Docker-compose
 
 **1、更新系统依赖：**
 
@@ -123,7 +123,7 @@ $ systemctl stop firewalld
 $ systemctl disable firewalld
 ```
 
-**3、安装Docker:**
+**3、安装 Docker:**
 
 ```bash
 # 所有节点服务器执行
@@ -140,7 +140,7 @@ yum list docker-ce.x86_64 --showduplicates | sort -r
 yum install -y docker-ce-20.10.6-* docker-ce-cli-20.10.6-*.x86_64
 ```
 
-**4、配置Docker并添加镜像:**
+**4、配置 Docker 并添加镜像:**
 
 ```bash
 # 设置Docker开机启动
@@ -155,12 +155,12 @@ cat > /etc/docker/daemon.json << EOF
 }
 EOF
 
-# systemctl daemon-reload 
+# systemctl daemon-reload
 # systemctl restart docker
 
 ```
 
-**5、安装Docker-Compose:**
+**5、安装 Docker-Compose:**
 
 ```bash
 sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -184,7 +184,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
 
-查看docker-compose 版本
+查看 docker-compose 版本
 
 ```bash
 docker-compose --version
