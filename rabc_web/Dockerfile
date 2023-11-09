@@ -5,7 +5,7 @@ FROM node:16-alpine as build-stage
 WORKDIR /app
 
 # 复制package.json和package-lock.json文件到容器中
-COPY package.json package-lock.json ./
+COPY .npmrc package.json package-lock.json ./
 
 # 安装项目依赖
 RUN npm install
