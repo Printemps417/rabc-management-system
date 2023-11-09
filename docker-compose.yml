@@ -27,7 +27,7 @@ services:
   server:
     container_name: rabc_backend
     build:
-      context: ./rabc_backend/
+      context: ./rabc_backend
     image: rabc_backend
     restart: unless-stopped
     ports:
@@ -58,7 +58,7 @@ services:
     image: rabc_web
     restart: unless-stopped
     ports:
-      - '3000:3000'
+      - '80:80'
     depends_on:
       - server
 
