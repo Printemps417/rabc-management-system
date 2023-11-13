@@ -47,7 +47,7 @@ const getPermissionFail = (error) => {
 // 异步的 action creator
 export const fetchUserData = () => {
     return (dispatch) => {
-        axios.get('/api/users/')
+        axios.get('http://localhost:8088/users/')
             .then((response) => {
                 dispatch(getUserSuccess(response.data))
             })
@@ -59,7 +59,7 @@ export const fetchUserData = () => {
 // Asynchronous action creator for roles
 export const fetchRoleData = () => {
     return (dispatch) => {
-        axios.get('/api/roles/')
+        axios.get('http://localhost:8088/roles/')
             .then((response) => {
                 dispatch(getRoleSuccess(response.data))
             })
@@ -72,7 +72,7 @@ export const fetchRoleData = () => {
 // Asynchronous action creator for permissions
 export const fetchPermissionData = () => {
     return (dispatch) => {
-        axios.get('/api/permissions/')
+        axios.get('http://localhost:8088/permissions/')
             .then((response) => {
                 dispatch(getPermissionSuccess(response.data))
             })
