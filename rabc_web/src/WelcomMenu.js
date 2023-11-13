@@ -17,7 +17,7 @@ const WelcomMenu = () => {
             'Authorization': 'Bearer ' + getToken()
         }
 
-        axios.get("http://localhost:8088/users/profile/get", { headers })
+        axios.get("/api/users/profile/get", { headers })
             .then((response) => {
                 console.log(response.data.data)
                 setUserMessage(response.data.data)
@@ -31,7 +31,7 @@ const WelcomMenu = () => {
 
     // 用户信息更新时，更新菜单信息
     useEffect(() => {
-        const munuurl = "http://localhost:8088/allocate/getmenus/" + UserMessage.account
+        const munuurl = "/api/allocate/getmenus/" + UserMessage.account
         console.log(munuurl)
         // 获取菜单项
         const fetchMenuItems = async () => {
