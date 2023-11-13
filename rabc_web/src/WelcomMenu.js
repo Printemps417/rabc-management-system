@@ -11,12 +11,13 @@ const WelcomMenu = () => {
     const [UserMessage, setUserMessage] = useState({})
     const [menuitems, setMenuitems] = useState(['系统管理', '基础设施', '支付管理'])
     const [nowlocation, setnowlocation] = useState(['系统管理', '用户管理'])
+    // 刚打开网站时，向后端核验用户的token
     useEffect(() => {
         const headers = {
             'Authorization': 'Bearer ' + getToken()
         }
 
-        axios.get("http://localhost:8088/users/profile/get", { headers })
+        axios.get("/api/users/profile/get", { headers })
             .then((response) => {
                 console.log(response.data.data)
                 setUserMessage(response.data.data)
@@ -24,10 +25,13 @@ const WelcomMenu = () => {
             })
             .catch(() => {
                 setFlag(false)
+                // 匹配失败时不能访问界面，返回登录界面
             })
     }, [])
+
+    // 用户信息更新时，更新菜单信息
     useEffect(() => {
-        const munuurl = "http://localhost:8088/allocate/getmenus/" + UserMessage.account
+        const munuurl = "/api/allocate/getmenus/" + UserMessage.account
         console.log(munuurl)
         // 获取菜单项
         const fetchMenuItems = async () => {
