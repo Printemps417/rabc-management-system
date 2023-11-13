@@ -50,7 +50,7 @@ const App = () => {
   })
 
   return (
-    <BrowserRouter>
+    <BrowserRouter >
       <Routes>
         <Route exact path="/" element={<Login />}></Route>
         <Route path="/login" element={<Login />}></Route>
