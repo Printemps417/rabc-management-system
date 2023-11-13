@@ -128,76 +128,79 @@ const User = () => {
         ]),
         getItem('Group', 'grp', null, [getItem('Option 13', '13'), getItem('Option 14', '14')], 'group'),
     ]
-    return (
-        <Layout
-            style={{
-                minHeight: '100vh',
-            }}
-        >
-            <div style={{ padding: '20px' }}>
-                <Row gutter={16} style={{ marginBottom: '20px' }}>
-                    <Col span={8}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <p style={{ margin: 0, marginRight: '8px', whiteSpace: 'nowrap' }}>用户名：</p>
-                            <Input placeholder="用户名" />
-                        </div>
-                    </Col>
-                    <Col span={8}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <p style={{ margin: 0, marginRight: '8px', whiteSpace: 'nowrap' }}>手机号：</p>
-                            <Input placeholder="手机号码" />
-                        </div>
-                    </Col>
-                    <Col span={6}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <p style={{ margin: 0, marginRight: '8px', whiteSpace: 'nowrap' }}>用户状态：</p>
-                            <Input placeholder="用户状态" />
-                        </div>
-                    </Col>
-                </Row>
+    return <p>User</p>
+    // return (
+    //     <>
+    //     <Layout
+    //         style={{
+    //             minHeight: '100vh',
+    //         }}
+    //     >
+    //         <div style={{ padding: '20px' }}>
+    //             <Row gutter={16} style={{ marginBottom: '20px' }}>
+    //                 <Col span={8}>
+    //                     <div style={{ display: 'flex', alignItems: 'center' }}>
+    //                         <p style={{ margin: 0, marginRight: '8px', whiteSpace: 'nowrap' }}>用户名：</p>
+    //                         <Input placeholder="用户名" />
+    //                     </div>
+    //                 </Col>
+    //                 <Col span={8}>
+    //                     <div style={{ display: 'flex', alignItems: 'center' }}>
+    //                         <p style={{ margin: 0, marginRight: '8px', whiteSpace: 'nowrap' }}>手机号：</p>
+    //                         <Input placeholder="手机号码" />
+    //                     </div>
+    //                 </Col>
+    //                 <Col span={6}>
+    //                     <div style={{ display: 'flex', alignItems: 'center' }}>
+    //                         <p style={{ margin: 0, marginRight: '8px', whiteSpace: 'nowrap' }}>用户状态：</p>
+    //                         <Input placeholder="用户状态" />
+    //                     </div>
+    //                 </Col>
+    //             </Row>
 
-                <Row gutter={16} style={{ marginBottom: '20px' }}>
-                    <Col span={16}>
-                        <RangePicker style={{ width: '100%' }} />
-                    </Col>
-                    <Col span={8}>
-                        <Button type="primary" style={{ marginRight: '10px' }}>查找</Button>
-                        <Button type="default" style={{ marginRight: '10px' }}>重置</Button>
-                        <Button type="primary" onClick={showModal} style={{ backgroundColor: 'rgba(24, 144, 255, 0.2)', marginRight: '10px', color: '#1890ff', borderColor: '#1890ff' }}>新增</Button>
-                        <Modal title="增加用户" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                            <Useradd />
-                        </Modal>
-                        <Modal title="分配角色" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
-                            <Usergetroles />
-                        </Modal>
-                        <Button type="primary" style={{ backgroundColor: 'rgba(255, 165, 0, 0.2)', marginRight: '10px', color: 'rgba(255, 165, 0, 1)', borderColor: 'rgba(255, 165, 0, 1)' }}>导入</Button>
-                        <Button type="primary" style={{ backgroundColor: 'rgba(82, 196, 26, 0.2)', color: '#52c41a', borderColor: '#52c41a' }}>导出</Button>
-                    </Col>
-                </Row>
-                {/* 这里可以添加表格或其他搜索结果展示的组件 */}
-            </div>
-            <div style={{ display: 'flex' }}>
-                <Menu
-                    theme="light"
-                    defaultSelectedKeys={['1']}
-                    mode="inline"
-                    items={items}
-                    style={{
-                        width: "200px",
-                        marginLeft: "30px",
-                        marginRight: "30px"
-                    }}
-                />
-                <div
-                    style={{
-                        backgroundColor: "white"
-                    }}
-                ><Table dataSource={data} columns={columns} />;
+    //             <Row gutter={16} style={{ marginBottom: '20px' }}>
+    //                 <Col span={16}>
+    //                     <RangePicker style={{ width: '100%' }} />
+    //                 </Col>
+    //                 <Col span={8}>
+    //                     <Button type="primary" style={{ marginRight: '10px' }}>查找</Button>
+    //                     <Button type="default" style={{ marginRight: '10px' }}>重置</Button>
+    //                     <Button type="primary" onClick={showModal} style={{ backgroundColor: 'rgba(24, 144, 255, 0.2)', marginRight: '10px', color: '#1890ff', borderColor: '#1890ff' }}>新增</Button>
+    //                     <Modal title="增加用户" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+    //                         <Useradd />
+    //                     </Modal>
+    //                     <Modal title="分配角色" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
+    //                         <Usergetroles />
+    //                     </Modal>
+    //                     <Button type="primary" style={{ backgroundColor: 'rgba(255, 165, 0, 0.2)', marginRight: '10px', color: 'rgba(255, 165, 0, 1)', borderColor: 'rgba(255, 165, 0, 1)' }}>导入</Button>
+    //                     <Button type="primary" style={{ backgroundColor: 'rgba(82, 196, 26, 0.2)', color: '#52c41a', borderColor: '#52c41a' }}>导出</Button>
+    //                 </Col>
+    //             </Row>
+    //             {/* 这里可以添加表格或其他搜索结果展示的组件 */}
+    //         </div>
+    //         <div style={{ display: 'flex' }}>
+    //             <Menu
+    //                 theme="light"
+    //                 defaultSelectedKeys={['1']}
+    //                 mode="inline"
+    //                 items={items}
+    //                 style={{
+    //                     width: "200px",
+    //                     marginLeft: "30px",
+    //                     marginRight: "30px"
+    //                 }}
+    //             />
+    //             <div
+    //                 style={{
+    //                     backgroundColor: "white"
+    //                 }}
+    //             ><Table dataSource={data} columns={columns} />;
 
-                </div>
-            </div>
+    //             </div>
+    //         </div>
 
-        </Layout>
-    )
+    //     </Layout>
+    //     </>
+    // )
 }
 export default User

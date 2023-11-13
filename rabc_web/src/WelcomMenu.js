@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons'
 import { Breadcrumb, Button, Layout, Menu, theme, message } from 'antd'
-import { BrowserRouter, Routes, Route, Link, Outlet, Navigate } from 'react-router-dom'
+import { Link, Outlet, Navigate } from 'react-router-dom'
 import { getToken, setToken, checkToken, removeToken } from './Tools/token'
 import axios from 'axios'
 
@@ -87,99 +87,101 @@ const WelcomMenu = () => {
     }
     else {
         return (
-            <Layout
-                theme="dark">
-                <Header
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-
-                    }}
-                    theme="light"
-                >
-                    <div>"  "</div>
-                    <p
+            <>
+                <Layout
+                    theme="dark">
+                    <Header
                         style={{
-                            color: "white",
-                            fontSize: "24px"
-                        }}
+                            display: 'flex',
+                            alignItems: 'center',
 
-                    >RBAC后台管理系统</p>
-                    <div>"  "</div>
-                    <p
-                        style={{
-                            color: "white",
-                            fontSize: "24px",
                         }}
-
-                    >——2301210284 李昊彬</p>
-                    <Button
-                        type='primary'
-                        style={{ display: 'right', justifyContent: 'flex-end', marginLeft: '60%' }}
-                        onClick={() => {
-                            removeToken()
-                            message.success("退出登录成功")
-                            setFlag(false)
-                        }}
-                    >退出登录</Button>
-                </Header>
-                <Content
-                    style={{
-                        padding: '0 50px',
-                    }}
-                >
-
-                    <Breadcrumb
-                        style={{
-                            margin: '16px 0',
-                        }}
+                        theme="light"
                     >
-                        {nowlocation.map((item, index) => {
-                            return <Breadcrumb.Item>{item}</Breadcrumb.Item>
-                        })}
-                    </Breadcrumb>
-                    <Layout
-                        style={{
-                            padding: '24px 0',
-                            background: colorBgContainer,
-                        }}
-                    >
-                        <Sider
+                        <div>"  "</div>
+                        <p
                             style={{
+                                color: "white",
+                                fontSize: "24px"
+                            }}
+
+                        >RBAC后台管理系统</p>
+                        <div>"  "</div>
+                        <p
+                            style={{
+                                color: "white",
+                                fontSize: "24px",
+                            }}
+
+                        >——2301210284 李昊彬</p>
+                        <Button
+                            type='primary'
+                            style={{ display: 'right', justifyContent: 'flex-end', marginLeft: '60%' }}
+                            onClick={() => {
+                                removeToken()
+                                message.success("退出登录成功")
+                                setFlag(false)
+                            }}
+                        >退出登录</Button>
+                    </Header>
+                    <Content
+                        style={{
+                            padding: '0 50px',
+                        }}
+                    >
+
+                        <Breadcrumb
+                            style={{
+                                margin: '16px 0',
+                            }}
+                        >
+                            {nowlocation.map((item, index) => {
+                                return <Breadcrumb.Item>{item}</Breadcrumb.Item>
+                            })}
+                        </Breadcrumb>
+                        <Layout
+                            style={{
+                                padding: '24px 0',
                                 background: colorBgContainer,
                             }}
-                            width={200}
-
                         >
-                            <Menu
-                                mode="inline"
-                                defaultSelectedKeys={['1']}
-                                defaultOpenKeys={['sub1']}
+                            <Sider
                                 style={{
-                                    height: '100%',
+                                    background: colorBgContainer,
                                 }}
-                                items={items2}
-                                theme='light'
-                            />
-                        </Sider>
-                        <Content
-                            style={{
-                                padding: '0 24px',
-                                minHeight: 280,
-                            }}
-                        >
-                            <Outlet />
-                        </Content>
-                    </Layout>
-                </Content>
-                <Footer
-                    style={{
-                        textAlign: 'center',
-                    }}
-                >
-                    hblee ©2023 互联网软件开发实践第五周作业
-                </Footer>
-            </Layout>
+                                width={200}
+
+                            >
+                                <Menu
+                                    mode="inline"
+                                    defaultSelectedKeys={['1']}
+                                    defaultOpenKeys={['sub1']}
+                                    style={{
+                                        height: '100%',
+                                    }}
+                                    items={items2}
+                                    theme='light'
+                                />
+                            </Sider>
+                            <Content
+                                style={{
+                                    padding: '0 24px',
+                                    minHeight: 280,
+                                }}
+                            >
+                                <Outlet />
+                            </Content>
+                        </Layout>
+                    </Content>
+                    <Footer
+                        style={{
+                            textAlign: 'center',
+                        }}
+                    >
+                        hblee ©2023 互联网软件开发实践第五周作业
+                    </Footer>
+                </Layout>
+            </>
         )
     }
 }

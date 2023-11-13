@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons'
 import { Breadcrumb, Button, Layout, Menu, theme, message } from 'antd'
-import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link, Navigate, HashRouter as Router } from 'react-router-dom'
 import User from './Components/User'
 import Role from './Components/Role'
 import Authorize from './Components/Authorize'
