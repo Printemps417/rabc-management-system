@@ -1,24 +1,32 @@
 import React, { useState, useEffect } from 'react'
 import { Breadcrumb, Layout, Menu, theme, Modal } from 'antd'
-import { DatePicker, Input, Button, Row, Col } from 'antd'
+import { DatePicker, Input, Button, Row, Col, message } from 'antd'
 import { Table, Switch } from 'antd'
 import Rolesadd from './Rolesadd'
 import Rolesgetauthorize from './Rolesgetauthorize'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchRoleData } from '../Redux/actions'
+import axios from 'axios'
 const { RangePicker } = DatePicker
 
 const Role = () => {
     const [collapsed, setCollapsed] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpen2, setIsModalOpen2] = useState(false)
-    const dispatch = useDispatch()
-    const data = useSelector(state => state.roledata)
+    const [data, setData] = useState([])
+    // const dispatch = useDispatch()
+    // const data = useSelector(state => state.roledata)
 
+    // useEffect(() => {
+    //     dispatch(fetchRoleData())
+    // }, [dispatch])
     useEffect(() => {
-        dispatch(fetchRoleData())
-    }, [dispatch])
-
+        axios.get('/api/roles/')
+            .then((response) => {
+                setData(response.data)
+            })
+            .catch((error) => {
+                message.error("读取数据失败")
+            })
+    }, [])
 
     const showModal = () => {
         setIsModalOpen(true)
@@ -115,70 +123,69 @@ const Role = () => {
             type,
         }
     }
-    return <p>Role</p>
-    // return (
-    //     <><Layout
-    //         style={{
-    //             minHeight: '100vh',
-    //         }}
-    //     >
-    //         <div style={{ padding: '20px' }}>
-    //             <Row gutter={16} style={{ marginBottom: '20px' }}>
+    return (
+        <><Layout
+            style={{
+                minHeight: '100vh',
+            }}
+        >
+            <div style={{ padding: '20px' }}>
+                <Row gutter={16} style={{ marginBottom: '20px' }}>
 
-    //                 <Col span={8}>
-    //                     <div style={{ display: 'flex', alignItems: 'center' }}>
-    //                         <p style={{ margin: 0, marginRight: '8px', whiteSpace: 'nowrap' }}>角色名称</p>
-    //                         <Input placeholder="角色名称" />
-    //                     </div>
-    //                 </Col>
-    //                 <Col span={8}>
-    //                     <div style={{ display: 'flex', alignItems: 'center' }}>
-    //                         <p style={{ margin: 0, marginRight: '8px', whiteSpace: 'nowrap' }}>角色标识：</p>
-    //                         <Input placeholder="角色标识" />
-    //                     </div>
-    //                 </Col>
-    //                 <Col span={6}>
-    //                     <div style={{ display: 'flex', alignItems: 'center' }}>
-    //                         <p style={{ margin: 0, marginRight: '8px', whiteSpace: 'nowrap' }}>角色状态：</p>
-    //                         <Input placeholder="角色状态" />
-    //                     </div>
-    //                 </Col>
-    //             </Row>
-    //             <Row gutter={16} style={{ marginBottom: '20px' }}>
-    //                 <Col span={16}>
-    //                     <RangePicker style={{ width: '100%' }} />
-    //                 </Col>
-    //                 <Col span={8}>
-    //                     <Button type="primary" style={{ marginRight: '10px' }}>查找</Button>
-    //                     <Button type="default" style={{ marginRight: '10px' }}>重置</Button>
-    //                     <Button type="primary" onClick={showModal} style={{ backgroundColor: 'rgba(24, 144, 255, 0.2)', marginRight: '10px', color: '#1890ff', borderColor: '#1890ff' }}>新增</Button>
-    //                     <Modal title="增加角色" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-    //                         <Rolesadd />
-    //                     </Modal>
-    //                     <Modal title="分配权限" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
-    //                         <Rolesgetauthorize />
-    //                     </Modal>
-    //                     <Button type="primary" style={{ backgroundColor: 'rgba(82, 196, 26, 0.2)', color: '#52c41a', borderColor: '#52c41a' }}>导出</Button>
-    //                 </Col>
-    //             </Row>
-    //             {/* 这里可以添加表格或其他搜索结果展示的组件 */}
-    //         </div>
-    //         <div style={{ display: 'flex' }}>
-    //             <div
-    //                 style={{
-    //                     backgroundColor: "white",
-    //                     marginLeft: "50px",
-    //                     width: "100%"
-    //                 }}
-    //             ><Table dataSource={data} columns={columns}
-    //                 style={{
-    //                     width: "100%"
-    //                 }}
-    //                 />;
-    //             </div>
-    //         </div>
+                    <Col span={8}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <p style={{ margin: 0, marginRight: '8px', whiteSpace: 'nowrap' }}>角色名称</p>
+                            <Input placeholder="角色名称" />
+                        </div>
+                    </Col>
+                    <Col span={8}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <p style={{ margin: 0, marginRight: '8px', whiteSpace: 'nowrap' }}>角色标识：</p>
+                            <Input placeholder="角色标识" />
+                        </div>
+                    </Col>
+                    <Col span={6}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <p style={{ margin: 0, marginRight: '8px', whiteSpace: 'nowrap' }}>角色状态：</p>
+                            <Input placeholder="角色状态" />
+                        </div>
+                    </Col>
+                </Row>
+                <Row gutter={16} style={{ marginBottom: '20px' }}>
+                    <Col span={16}>
+                        <RangePicker style={{ width: '100%' }} />
+                    </Col>
+                    <Col span={8}>
+                        <Button type="primary" style={{ marginRight: '10px' }}>查找</Button>
+                        <Button type="default" style={{ marginRight: '10px' }}>重置</Button>
+                        <Button type="primary" onClick={showModal} style={{ backgroundColor: 'rgba(24, 144, 255, 0.2)', marginRight: '10px', color: '#1890ff', borderColor: '#1890ff' }}>新增</Button>
+                        <Modal title="增加角色" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                            <Rolesadd />
+                        </Modal>
+                        <Modal title="分配权限" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
+                            <Rolesgetauthorize />
+                        </Modal>
+                        <Button type="primary" style={{ backgroundColor: 'rgba(82, 196, 26, 0.2)', color: '#52c41a', borderColor: '#52c41a' }}>导出</Button>
+                    </Col>
+                </Row>
+                {/* 这里可以添加表格或其他搜索结果展示的组件 */}
+            </div>
+            <div style={{ display: 'flex' }}>
+                <div
+                    style={{
+                        backgroundColor: "white",
+                        marginLeft: "50px",
+                        width: "100%"
+                    }}
+                ><Table dataSource={data} columns={columns}
+                    style={{
+                        width: "100%"
+                    }}
+                    />;
+                </div>
+            </div>
 
-    //     </Layout></>
-    // )
+        </Layout></>
+    )
 }
 export default Role
