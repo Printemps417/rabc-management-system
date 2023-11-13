@@ -18,11 +18,11 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 数据库： `rabc`
+-- 数据库： `webdevlesson`
 --
 -- 创建新数据库 rabc 并选择
 CREATE DATABASE IF NOT EXISTS `webdevlesson` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `rabc`;
+USE `webdevlesson`;
 
 -- users表格
 DROP TABLE IF EXISTS `users`;
