@@ -15,7 +15,8 @@ const User = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpen2, setIsModalOpen2] = useState(false)
 
-    const { userdata, roledata, authodata } = useContext(DataContext)
+    // const { userdata, roledata, authodata } = useContext(DataContext)
+    const userdata = []
 
     const showModal = () => {
         setIsModalOpen(true)
