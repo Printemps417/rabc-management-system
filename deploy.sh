@@ -47,7 +47,7 @@ docker run -it --rm --name rabc-maven \
     -v "$PWD/rabc_backend":/usr/src/mymaven \
     -w /usr/src/mymaven \
     maven:3.8.4-jdk-8 mvn clean install package -e '-Dmaven.test.skip=true' || { echo -e "${RED}构建 jar 包失败。${NC}"; exit 1; }
-
+# PWD当前脚本工作目录的绝对路径
 echo -e "通过容器构建 jar 包......${GREEN}通过${NC}"
 
 # 构建镜像
