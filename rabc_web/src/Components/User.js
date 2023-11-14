@@ -5,7 +5,6 @@ import { Table, Switch } from 'antd'
 import Useradd from './Useradd'
 import Usergetroles from './Usergetroles'
 import axios from 'axios'
-import { Consumer } from '../WelcomMenu'
 import { DataContext } from '../WelcomMenu'
 const { RangePicker } = DatePicker
 const { Header, Content, Footer, Sider } = Layout
@@ -15,18 +14,7 @@ const User = () => {
     const [collapsed, setCollapsed] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpen2, setIsModalOpen2] = useState(false)
-    const [userdata, setUserData] = useState([])
-
-    useEffect(() => {
-        axios.get('/api/users/')
-            .then((response) => {
-                setUserData(response.data)
-            })
-            .catch((error) => {
-                message.error("读取数据失败")
-            })
-    }, [])
-    // const { userdata, roledata, authodata } = useContext(DataContext)
+    const { userdata, roledata, authodata } = useContext(DataContext)
 
     const showModal = () => {
         setIsModalOpen(true)

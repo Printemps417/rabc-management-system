@@ -3,7 +3,6 @@ import { Form, Input, Select, Button, message } from 'antd'
 import { Checkbox, Divider } from 'antd'
 import { Mentions } from 'antd'
 import axios from 'axios'
-import { useDispatch, useSelector } from 'react-redux'
 import { DataContext } from '../WelcomMenu'
 
 const CheckboxGroup = Checkbox.Group
@@ -12,7 +11,6 @@ const { Option } = Select
 
 const Rolesgetauthorize = () => {
 
-    const dispatch = useDispatch()
     const { userdata, roledata, authodata } = useContext(DataContext)
     const [checkedList, setCheckedList] = useState([])
 
