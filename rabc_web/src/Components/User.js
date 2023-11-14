@@ -18,7 +18,7 @@ const User = () => {
     // const [userdata, setUserData] = useState([])
 
     // useEffect(() => {
-    //     axios.get('http://localhost:8088/users/')
+    //     axios.get('/api/users/')
     //         .then((response) => {
     //             setUserData(response.data)
     //         })

@@ -11,7 +11,7 @@ const Login = () => {
     const headers = {
         'Authorization': 'Bearer ' + getToken()
     }
-    axios.get("http://localhost:8088/users/profile/get", { headers })
+    axios.get("/api/users/profile/get", { headers })
         .then((response) => {
             console.log(response.data.data)
             setFlag(Boolean(response.data.data))
@@ -25,7 +25,7 @@ const Login = () => {
     }
     const onFinish = async (values) => {
         try {
-            axios.post('http://localhost:8088/users/login', {
+            axios.post('/api/users/login', {
                 username: values.username,
                 password: values.password,
             }).then(response => {
