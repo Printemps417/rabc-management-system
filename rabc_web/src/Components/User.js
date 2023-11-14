@@ -15,8 +15,8 @@ const User = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpen2, setIsModalOpen2] = useState(false)
 
-    // const { userdata, roledata, authodata } = useContext(DataContext)
-    const userdata = []
+    const { userdata, roledata, authodata } = useContext(DataContext)
+    // const userdata = []
 
     const showModal = () => {
         setIsModalOpen(true)
@@ -40,9 +40,7 @@ const User = () => {
     const handleCancel2 = () => {
         setIsModalOpen2(false)
     }
-    const {
-        token: { colorBgContainer },
-    } = theme.useToken()
+
     const onChange = (checked) => {
         console.log(`switch to ${checked}`)
     }
@@ -77,7 +75,7 @@ const User = () => {
             title: '状态',
             dataIndex: 'status',
             key: 'status',
-            render: (status) => <Switch defaultChecked onChange={onChange} />
+            render: (status) => <Switch defaultChecked={status} onChange={onChange} />
         },
         {
             title: '创建时间',

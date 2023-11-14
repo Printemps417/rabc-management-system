@@ -13,8 +13,8 @@ const Role = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpen2, setIsModalOpen2] = useState(false)
 
-    // const { userdata, roledata, authodata } = useContext(DataContext)
-    const roledata = []
+    const { userdata, roledata, authodata } = useContext(DataContext)
+    // const roledata = []
 
     const showModal = () => {
         setIsModalOpen(true)
@@ -39,9 +39,7 @@ const Role = () => {
     const handleCancel2 = () => {
         setIsModalOpen2(false)
     }
-    const {
-        token: { colorBgContainer },
-    } = theme.useToken()
+
     const onChange = (checked) => {
         console.log(`switch to ${checked}`)
     }

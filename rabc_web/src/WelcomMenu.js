@@ -20,6 +20,7 @@ const WelcomMenu = () => {
         axios.get('/api/users/')
             .then((response) => {
                 setUserdata(response.data)
+                console.log(response.data)
             })
             .catch((error) => {
                 message.error("读取数据失败")
@@ -27,6 +28,7 @@ const WelcomMenu = () => {
         axios.get('/api/roles/')
             .then((response) => {
                 setRoledata(response.data)
+                console.log(response.data)
             })
             .catch((error) => {
                 message.error("读取数据失败")
@@ -34,6 +36,7 @@ const WelcomMenu = () => {
         axios.get('/api/permissions/')
             .then((response) => {
                 setAuthodata(response.data)
+                console.log(response.data)
             })
             .catch((error) => {
                 message.error("读取数据失败")
