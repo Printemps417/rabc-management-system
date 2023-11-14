@@ -17,21 +17,21 @@ const WelcomMenu = () => {
     const [authodata, setAuthodata] = useState([])
 
     useEffect(() => {
-        axios.get('/api/users/')
+        axios.get('http://localhost:8088/users/')
             .then((response) => {
                 setUserdata(response.data)
             })
             .catch((error) => {
                 message.error("读取数据失败")
             })
-        axios.get('/api/roles/')
+        axios.get('http://localhost:8088/roles/')
             .then((response) => {
                 setRoledata(response.data)
             })
             .catch((error) => {
                 message.error("读取数据失败")
             })
-        axios.get('/api/permissions/')
+        axios.get('http://localhost:8088/permissions/')
             .then((response) => {
                 setAuthodata(response.data)
             })
@@ -46,7 +46,7 @@ const WelcomMenu = () => {
             'Authorization': 'Bearer ' + getToken()
         }
 
-        axios.get("/api/users/profile/get", { headers })
+        axios.get("http://localhost:8088/users/profile/get", { headers })
             .then((response) => {
                 console.log(response.data.data)
                 setUserMessage(response.data.data)
@@ -60,14 +60,14 @@ const WelcomMenu = () => {
 
     // 用户信息更新时，更新菜单信息
     useEffect(() => {
-        const munuurl = "/api/allocate/getmenus/" + UserMessage.account
+        const munuurl = "http://localhost:8088/allocate/getmenus/" + UserMessage.account
         console.log(munuurl)
         // 获取菜单项
         const fetchMenuItems = async () => {
             try {
-                const response = await axios.get(munuurl)
+                const response = await axios.get(munuurl).then(res => { console.log(res) })
                 setMenuitems([...menuitems, ...response.data])
-                console.log(menuitems)
+
                 // ...其他逻辑
             } catch (error) {
                 console.log("读取菜单失败")

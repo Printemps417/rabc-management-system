@@ -15,7 +15,7 @@ const checkToken = async () => {
     }
 
     try {
-        const response = await axios.get("/api/users/profile/get", { headers })
+        const response = await axios.get("http://localhost:8088/users/profile/get", { headers })
         return Boolean(response.data.data) // Will return true if data exists, false otherwise.
     } catch (e) {
         console.error("读取token失败！", e)

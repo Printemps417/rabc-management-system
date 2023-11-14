@@ -109,7 +109,7 @@ const Role = () => {
             type,
         }
     }
-    return (
+    return (1 ? <p>hello</p> :
         <><Layout
             style={{
                 minHeight: '100vh',
@@ -149,8 +149,7 @@ const Role = () => {
                             <Rolesadd />
                         </Modal>
                         <Modal title="分配权限" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
-                            <p>hello</p>
-                            {/* <Rolesgetauthorize /> */}
+                            <Rolesgetauthorize />
                         </Modal>
                         <Button type="primary" style={{ backgroundColor: 'rgba(82, 196, 26, 0.2)', color: '#52c41a', borderColor: '#52c41a' }}>导出</Button>
                     </Col>
