@@ -102,10 +102,10 @@ const Role = () => {
             key: 'operation',
             render: () =>
                 <>
-                    <a href="#">编辑</a>
-                    <a href="#" onClick={showModal2} > 菜单权限</a>
-                    <a href="#"> 数据权限</a>
-                    <a href="#" style={{ color: "red" }}>  删除</a>
+                    <a >编辑</a>
+                    <a onClick={showModal2} > 菜单权限</a>
+                    <a > 数据权限</a>
+                    <a style={{ color: "red" }}>  删除</a>
                 </>,
         },
     ]

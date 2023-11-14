@@ -65,15 +65,14 @@ const Authorize = () => {
             key: 'operation',
             render: () =>
                 <>
-                    <a href="#" onClick={showModal}>修改</a>
-                    <a href="#" onClick={showModal}>  新增</a>
-                    <a href="#" style={{ color: "red" }}>  删除</a>
+                    <a onClick={showModal}>修改</a>
+                    <a onClick={showModal}>  新增</a>
+                    <a style={{ color: "red" }}>  删除</a>
                 </>,
         },
     ]
     return (
         <><Layout style={{ minHeight: '100vh' }}>
-
             <Content style={{ margin: '16px' }}>
                 <div style={{ padding: '20px' }}>
                     <Row gutter={16} style={{ marginBottom: '20px' }}>

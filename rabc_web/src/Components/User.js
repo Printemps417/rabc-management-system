@@ -97,8 +97,8 @@ const User = () => {
             dataIndex: 'operation',
             key: 'operation',
             render: () => <>
-                <a href="#" onClick={showModal}>修改</a>
-                <a href="#" onClick={showModal2}>——分配角色</a>
+                <a onClick={showModal}>修改</a>
+                <a onClick={showModal2}>——分配角色</a>
             </>
         },
     ]
