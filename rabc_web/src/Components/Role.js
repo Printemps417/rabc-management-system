@@ -7,7 +7,7 @@ import Rolesgetauthorize from './Rolesgetauthorize'
 import axios from 'axios'
 import { DataContext } from '../WelcomMenu'
 const { RangePicker } = DatePicker
-
+const { Header, Sider, Content } = Layout
 const Role = () => {
     const [collapsed, setCollapsed] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
