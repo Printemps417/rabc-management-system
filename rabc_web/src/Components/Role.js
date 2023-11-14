@@ -12,7 +12,18 @@ const Role = () => {
     const [collapsed, setCollapsed] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpen2, setIsModalOpen2] = useState(false)
-    const { userdata, roledata, authodata } = useContext(DataContext)
+    const [roledata, setRoleData] = useState([])
+
+    useEffect(() => {
+        axios.get('/api/roles/')
+            .then((response) => {
+                setRoleData(response.data)
+            })
+            .catch((error) => {
+                message.error("读取数据失败")
+            })
+    }, [])
+    // const { userdata, roledata, authodata } = useContext(DataContext)
 
     const showModal = () => {
         setIsModalOpen(true)
