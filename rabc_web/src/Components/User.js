@@ -14,6 +14,16 @@ const User = () => {
     const [collapsed, setCollapsed] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpen2, setIsModalOpen2] = useState(false)
+    // const [userdata, setUserdata] = useState([])
+    // useEffect(() => {
+    //     axios.get('/api/roles/')
+    //         .then((response) => {
+    //             setUserdata(response.data)
+    //         })
+    //         .catch((error) => {
+    //             message.error("读取数据失败")
+    //         })
+    // }, [])
     const { userdata, roledata, authodata } = useContext(DataContext)
 
     const showModal = () => {
@@ -123,7 +133,7 @@ const User = () => {
         ]),
         getItem('Group', 'grp', null, [getItem('Option 13', '13'), getItem('Option 14', '14')], 'group'),
     ]
-    return 1 ? <p>hello</p> : (
+    return (
         <>
             <Layout
                 style={{

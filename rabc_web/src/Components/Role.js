@@ -12,6 +12,16 @@ const Role = () => {
     const [collapsed, setCollapsed] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpen2, setIsModalOpen2] = useState(false)
+    // const [roledata, setRoledata] = useState([])
+    // useEffect(() => {
+    //     axios.get('/api/roles/')
+    //         .then((response) => {
+    //             setRoledata(response.data)
+    //         })
+    //         .catch((error) => {
+    //             message.error("读取数据失败")
+    //         })
+    // }, [])
     const { userdata, roledata, authodata } = useContext(DataContext)
 
     const showModal = () => {
@@ -109,7 +119,7 @@ const Role = () => {
             type,
         }
     }
-    return (1 ? <p>hello</p> :
+    return (
         <><Layout
             style={{
                 minHeight: '100vh',

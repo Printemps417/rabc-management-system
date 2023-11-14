@@ -71,7 +71,7 @@ const Authorize = () => {
                 </>,
         },
     ]
-    return (1 ? <p>hello</p> :
+    return (
         <><Layout style={{ minHeight: '100vh' }}>
 
             <Content style={{ margin: '16px' }}>
