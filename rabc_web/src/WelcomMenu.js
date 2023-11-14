@@ -20,7 +20,7 @@ const WelcomMenu = () => {
         axios.get('/api/users/')
             .then((response) => {
                 setUserdata(response.data)
-                console.log(response.data)
+                // console.log(response.data)
             })
             .catch((error) => {
                 message.error("读取数据失败")
@@ -28,7 +28,7 @@ const WelcomMenu = () => {
         axios.get('/api/roles/')
             .then((response) => {
                 setRoledata(response.data)
-                console.log(response.data)
+                // console.log(response.data)
             })
             .catch((error) => {
                 message.error("读取数据失败")
@@ -36,7 +36,7 @@ const WelcomMenu = () => {
         axios.get('/api/permissions/')
             .then((response) => {
                 setAuthodata(response.data)
-                console.log(response.data)
+                // console.log(response.data)
             })
             .catch((error) => {
                 message.error("读取数据失败")
@@ -68,7 +68,7 @@ const WelcomMenu = () => {
         // 获取菜单项
         const fetchMenuItems = async () => {
             try {
-                const response = await axios.get(munuurl).then(res => { console.log(res) })
+                const response = await axios.get(munuurl)
                 setMenuitems([...menuitems, ...response.data])
 
                 // ...其他逻辑
