@@ -1,28 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Layout, Input, Button, Row, Col, Table, Switch, Modal, message } from 'antd'
 import Authorizeadd from './Authorizeadd'
 import axios from 'axios'
-const { Header, Sider, Content } = Layout
+import { DataContext } from '../WelcomMenu'
 
+const { Header, Sider, Content } = Layout
 const Authorize = () => {
     const [collapsed, setCollapsed] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const [data, setData] = useState([])
-    // const dispatch = useDispatch()
-    // const data = useSelector(state => state.authodata)
-
-    // useEffect(() => {
-    //     dispatch(fetchPermissionData())
-    // }, [dispatch])
-    useEffect(() => {
-        axios.get('/api/permissions/')
-            .then((response) => {
-                setData(response.data)
-            })
-            .catch((error) => {
-                message.error("读取数据失败")
-            })
-    }, [])
+    const { userdata, roledata, authodata } = useContext(DataContext)
 
     const showModal = () => {
         setIsModalOpen(true)
@@ -130,7 +116,7 @@ const Authorize = () => {
                             width: '100%',
                         }}
                     >
-                        <Table dataSource={data} columns={columns} style={{ width: '100%' }} />
+                        <Table dataSource={authodata} columns={columns} style={{ width: '100%' }} />
                     </div>
                 </div>
             </Content>

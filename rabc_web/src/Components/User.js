@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Breadcrumb, Layout, Menu, theme, Modal, message } from 'antd'
 import { DatePicker, Input, Button, Row, Col } from 'antd'
 import { Table, Switch } from 'antd'
 import Useradd from './Useradd'
 import Usergetroles from './Usergetroles'
 import axios from 'axios'
+import { Consumer } from '../WelcomMenu'
+import { DataContext } from '../WelcomMenu'
 const { RangePicker } = DatePicker
 const { Header, Content, Footer, Sider } = Layout
 
@@ -13,22 +15,18 @@ const User = () => {
     const [collapsed, setCollapsed] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpen2, setIsModalOpen2] = useState(false)
-    const [data, setData] = useState([])
-    // const dispatch = useDispatch()
-    // const data = useSelector(state => state.userdata)
+    // const [userdata, setUserData] = useState([])
 
     // useEffect(() => {
-    //     dispatch(fetchUserData())
-    // }, [dispatch])
-    useEffect(() => {
-        axios.get('/api/users/')
-            .then((response) => {
-                setData(response.data)
-            })
-            .catch((error) => {
-                message.error("读取数据失败")
-            })
-    }, [])
+    //     axios.get('http://localhost:8088/users/')
+    //         .then((response) => {
+    //             setUserData(response.data)
+    //         })
+    //         .catch((error) => {
+    //             message.error("读取数据失败")
+    //         })
+    // }, [])
+    const { userdata, roledata, authodata } = useContext(DataContext)
 
     const showModal = () => {
         setIsModalOpen(true)
@@ -202,7 +200,7 @@ const User = () => {
                         style={{
                             backgroundColor: "white"
                         }}
-                    ><Table dataSource={data} columns={columns} />;
+                    ><Table dataSource={userdata} columns={columns} />;
 
                     </div>
                 </div>

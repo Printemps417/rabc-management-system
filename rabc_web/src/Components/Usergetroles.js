@@ -1,11 +1,11 @@
-import React from 'react'
-import { Form, Input, Select, Button, Mentions } from 'antd'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useEffect, useContext } from 'react'
+import { Form, Input, Select, Button, Mentions, message } from 'antd'
+import { DataContext } from '../WelcomMenu'
+import axios from 'axios'
 const { Option } = Select
 
 const Usergetroles = () => {
-    const roledata = useSelector(state => state.roledata)
-    const userdata = useSelector(state => state.userdata)
+    const { userdata, roledata, authodata } = useContext(DataContext)
     const onFinish = (values) => {
         console.log('Received values:', values)
     }

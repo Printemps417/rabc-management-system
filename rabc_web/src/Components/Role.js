@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Breadcrumb, Layout, Menu, theme, Modal } from 'antd'
 import { DatePicker, Input, Button, Row, Col, message } from 'antd'
 import { Table, Switch } from 'antd'
 import Rolesadd from './Rolesadd'
 import Rolesgetauthorize from './Rolesgetauthorize'
 import axios from 'axios'
+import { DataContext } from '../WelcomMenu'
 const { RangePicker } = DatePicker
 
 const Role = () => {
     const [collapsed, setCollapsed] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpen2, setIsModalOpen2] = useState(false)
-    const [data, setData] = useState([])
-    // const dispatch = useDispatch()
-    // const data = useSelector(state => state.roledata)
-
-    // useEffect(() => {
-    //     dispatch(fetchRoleData())
-    // }, [dispatch])
-    useEffect(() => {
-        axios.get('/api/roles/')
-            .then((response) => {
-                setData(response.data)
-            })
-            .catch((error) => {
-                message.error("读取数据失败")
-            })
-    }, [])
+    const { userdata, roledata, authodata } = useContext(DataContext)
 
     const showModal = () => {
         setIsModalOpen(true)
@@ -177,7 +163,7 @@ const Role = () => {
                         marginLeft: "50px",
                         width: "100%"
                     }}
-                ><Table dataSource={data} columns={columns}
+                ><Table dataSource={roledata} columns={columns}
                     style={{
                         width: "100%"
                     }}

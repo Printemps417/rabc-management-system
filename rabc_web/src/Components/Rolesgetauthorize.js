@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
-import { Form, Input, Select, Button } from 'antd'
+import React, { useState, useEffect, useContext } from 'react'
+import { Form, Input, Select, Button, message } from 'antd'
 import { Checkbox, Divider } from 'antd'
 import { Mentions } from 'antd'
+import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-const CheckboxGroup = Checkbox.Group
+import { DataContext } from '../WelcomMenu'
 
+const CheckboxGroup = Checkbox.Group
 
 const { Option } = Select
 
 const Rolesgetauthorize = () => {
 
     const dispatch = useDispatch()
-    const roledata = useSelector(state => state.roledata)
-    const authodata = useSelector(state => state.authodata)
+    const { userdata, roledata, authodata } = useContext(DataContext)
     const [checkedList, setCheckedList] = useState([])
 
     const onFinish = (values) => {

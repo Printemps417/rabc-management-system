@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, createContext } from 'react'
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons'
 import { Breadcrumb, Button, Layout, Menu, theme, message } from 'antd'
 import { Link, Outlet, Navigate } from 'react-router-dom'
 import { getToken, setToken, checkToken, removeToken } from './Tools/token'
 import axios from 'axios'
+export const DataContext = createContext()
 
 const { Header, Content, Footer, Sider } = Layout
 const WelcomMenu = () => {
@@ -11,13 +12,41 @@ const WelcomMenu = () => {
     const [UserMessage, setUserMessage] = useState({})
     const [menuitems, setMenuitems] = useState(['系统管理', '基础设施', '支付管理'])
     const [nowlocation, setnowlocation] = useState(['系统管理', '用户管理'])
+    const [userdata, setUserdata] = useState([])
+    const [roledata, setRoledata] = useState([])
+    const [authodata, setAuthodata] = useState([])
+
+    useEffect(() => {
+        axios.get('http://localhost:8088/users/')
+            .then((response) => {
+                setUserdata(response.data)
+            })
+            .catch((error) => {
+                message.error("读取数据失败")
+            })
+        axios.get('http://localhost:8088/roles/')
+            .then((response) => {
+                setRoledata(response.data)
+            })
+            .catch((error) => {
+                message.error("读取数据失败")
+            })
+        axios.get('http://localhost:8088/permissions/')
+            .then((response) => {
+                setAuthodata(response.data)
+            })
+            .catch((error) => {
+                message.error("读取数据失败")
+            })
+    }, [])
+
     // 刚打开网站时，向后端核验用户的token
     useEffect(() => {
         const headers = {
             'Authorization': 'Bearer ' + getToken()
         }
 
-        axios.get("/api/users/profile/get", { headers })
+        axios.get("http://localhost:8088/users/profile/get", { headers })
             .then((response) => {
                 console.log(response.data.data)
                 setUserMessage(response.data.data)
@@ -31,7 +60,7 @@ const WelcomMenu = () => {
 
     // 用户信息更新时，更新菜单信息
     useEffect(() => {
-        const munuurl = "/api/allocate/getmenus/" + UserMessage.account
+        const munuurl = "http://localhost:8088/allocate/getmenus/" + UserMessage.account
         console.log(munuurl)
         // 获取菜单项
         const fetchMenuItems = async () => {
@@ -81,13 +110,14 @@ const WelcomMenu = () => {
 
         }
     })
+
     if (!flag) {
         message.error('您尚未登录！页面即将跳转')
         return <Navigate to='/login' replace={true} />
     }
     else {
         return (
-            <>
+            <DataContext.Provider value={{ userdata, roledata, authodata }}>
                 <Layout
                     theme="dark">
                     <Header
@@ -181,7 +211,7 @@ const WelcomMenu = () => {
                         hblee ©2023 互联网软件开发实践第五周作业
                     </Footer>
                 </Layout>
-            </>
+            </DataContext.Provider>
         )
     }
 }
