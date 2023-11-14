@@ -150,9 +150,9 @@ const Role = () => {
                             <Modal title="增加角色" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                                 <Rolesadd />
                             </Modal>
-                            {/* <Modal title="分配权限" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
-                            <Rolesgetauthorize />
-                        </Modal> */}
+                            <Modal title="分配权限" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
+                                <Rolesgetauthorize />
+                            </Modal>
                             <Button type="primary" style={{ backgroundColor: 'rgba(82, 196, 26, 0.2)', color: '#52c41a', borderColor: '#52c41a' }}>导出</Button>
                         </Col>
                     </Row>

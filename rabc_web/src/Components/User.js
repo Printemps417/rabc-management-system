@@ -165,9 +165,9 @@ const User = () => {
                                 <Modal title="增加用户" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                                     <Useradd />
                                 </Modal>
-                                {/* <Modal title="分配角色" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
-                                <Usergetroles />
-                            </Modal> */}
+                                <Modal title="分配角色" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
+                                    <Usergetroles />
+                                </Modal>
                                 <Button type="primary" style={{ backgroundColor: 'rgba(255, 165, 0, 0.2)', marginRight: '10px', color: 'rgba(255, 165, 0, 1)', borderColor: 'rgba(255, 165, 0, 1)' }}>导入</Button>
                                 <Button type="primary" style={{ backgroundColor: 'rgba(82, 196, 26, 0.2)', color: '#52c41a', borderColor: '#52c41a' }}>导出</Button>
                             </Col>
