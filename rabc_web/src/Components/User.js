@@ -14,16 +14,7 @@ const User = () => {
     const [collapsed, setCollapsed] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpen2, setIsModalOpen2] = useState(false)
-    // const [userdata, setUserdata] = useState([])
-    // useEffect(() => {
-    //     axios.get('/api/roles/')
-    //         .then((response) => {
-    //             setUserdata(response.data)
-    //         })
-    //         .catch((error) => {
-    //             message.error("读取数据失败")
-    //         })
-    // }, [])
+
     const { userdata, roledata, authodata } = useContext(DataContext)
 
     const showModal = () => {
@@ -173,9 +164,9 @@ const User = () => {
                             <Modal title="增加用户" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                                 <Useradd />
                             </Modal>
-                            <Modal title="分配角色" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
+                            {/* <Modal title="分配角色" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
                                 <Usergetroles />
-                            </Modal>
+                            </Modal> */}
                             <Button type="primary" style={{ backgroundColor: 'rgba(255, 165, 0, 0.2)', marginRight: '10px', color: 'rgba(255, 165, 0, 1)', borderColor: 'rgba(255, 165, 0, 1)' }}>导入</Button>
                             <Button type="primary" style={{ backgroundColor: 'rgba(82, 196, 26, 0.2)', color: '#52c41a', borderColor: '#52c41a' }}>导出</Button>
                         </Col>
