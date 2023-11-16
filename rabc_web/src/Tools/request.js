@@ -6,7 +6,7 @@ import config from '../Config/config'
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
 // 创建axios实例
-const service = axios.create({
+const request = axios.create({
     // axios中请求配置有baseURL选项，表示请求URL公共部分
     baseURL: config.baseUrl, // 此处的 /api/ 地址，原因是nginx反向代理的基础路径为 /api/
     // 超时
@@ -19,7 +19,7 @@ const service = axios.create({
 })
 
 // request拦截器
-service.interceptors.request.use(
+request.interceptors.request.use(
     config => {
         // 在发送请求之前做些什么
         if (!getAccessToken()) {
@@ -35,7 +35,7 @@ service.interceptors.request.use(
 )
 
 // 响应拦截器
-service.interceptors.response.use(
+request.interceptors.response.use(
     response => {
         // 对响应数据做点什么
         console.log(response)
@@ -64,6 +64,9 @@ const handleAuthorized = () => {
     if (getRefreshToken()) {
         // 如果有refreshToken且无accesstoken，则刷新token
         ReloadToken()
+            .then(() => {
+                window.location.reload()
+            })
             .catch(e => {
                 console.log("刷新token失败！RefreshToken有误！")
                 console.log(e)
@@ -84,4 +87,4 @@ const handleInvalid = () => {
     }
 }
 
-export default service
+export default request

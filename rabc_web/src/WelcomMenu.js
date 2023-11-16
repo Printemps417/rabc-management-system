@@ -4,7 +4,7 @@ import { Breadcrumb, Button, Layout, Menu, theme, message } from 'antd'
 import { Link, Outlet, Navigate } from 'react-router-dom'
 import { getAccessToken, setAccessToken, removeToken } from './Tools/token'
 import axios from 'axios'
-import service from './Tools/request'
+import request from './Tools/request'
 export const DataContext = createContext()
 
 const { Header, Content, Footer, Sider } = Layout
@@ -22,11 +22,11 @@ const WelcomMenu = () => {
         const headers = {
             'Authorization': 'Bearer ' + getAccessToken()
         }
-        service.get("/users/profile/get", { headers })
+        request.get("/users/profile/get", { headers })
             .then((response) => {
                 setUserMessage(response.data.data)
             })
-        service.get('/users/', { headers })
+        request.get('/users/', { headers })
             .then((response) => {
                 setUserdata(response.data)
                 // console.log(response.data)
@@ -34,7 +34,7 @@ const WelcomMenu = () => {
             .catch((error) => {
                 message.error("读取用户数据失败")
             })
-        service.get('/roles/', { headers })
+        request.get('/roles/', { headers })
             .then((response) => {
                 setRoledata(response.data)
                 // console.log(response.data)
@@ -42,7 +42,7 @@ const WelcomMenu = () => {
             .catch((error) => {
                 message.error("读取角色数据失败")
             })
-        service.get('/permissions/', { headers })
+        request.get('/permissions/', { headers })
             .then((response) => {
                 setAuthodata(response.data)
                 // console.log(response.data)
@@ -60,7 +60,7 @@ const WelcomMenu = () => {
         // 获取菜单项
         const fetchMenuItems = async () => {
             try {
-                const response = await service.get(munuurl)
+                const response = await request.get(munuurl)
                 setMenuitems([...menuitems, ...response.data])
 
                 // ...其他逻辑

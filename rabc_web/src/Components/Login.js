@@ -4,7 +4,7 @@ import { Button, Checkbox, Form, Input, message, notification } from 'antd'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
 import { getAccessToken, setAccessToken, getRefreshToken, setRefreshToken } from '../Tools/token'
-import service from '../Tools/request'
+import request from '../Tools/request'
 
 const Login = () => {
     const [redirect, setRedirect] = useState(false)
@@ -12,7 +12,7 @@ const Login = () => {
         window.location.href = '/welcome/user'
     }
 
-    service.get("/users/profile/get")
+    request.get("/users/profile/get")
         .then((response) => {
             console.log("用户名为：" + response.data.data)
             if (Boolean(response.data.data)) {
@@ -22,7 +22,7 @@ const Login = () => {
         })
 
     const onFinish = async (values) => {
-        await service.post('/users/login', {
+        await request.post('/users/login', {
             username: values.username,
             password: values.password,
         }).then(response => {
