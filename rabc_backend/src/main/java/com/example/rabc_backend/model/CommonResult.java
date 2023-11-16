@@ -11,7 +11,6 @@ public class CommonResult<T> implements Serializable {
     private String msg;
     private T data;
 
-
     public static <T> CommonResult<T> success(T data) {
         CommonResult<T> result = new CommonResult<>();
         result.code = 200;

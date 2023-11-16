@@ -1,5 +1,6 @@
 package com.example.rabc_backend.controller;
 
+import com.example.rabc_backend.note.AuthToken;
 import com.example.rabc_backend.service.AllocateService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 @CrossOrigin
 @RestController
+@AuthToken
 @RequestMapping("/allocate")
 @RequiredArgsConstructor
 public class AllocateController {

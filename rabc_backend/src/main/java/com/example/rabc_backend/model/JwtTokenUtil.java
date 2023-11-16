@@ -5,16 +5,21 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.Claims;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 @Component
 public class JwtTokenUtil {
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -24,15 +29,21 @@ public class JwtTokenUtil {
 
     @Value("${jwt.refresh_token.expiration}")
     private Long refreshTokenExpiration;
-
+    private TimeUnit timeUnit= TimeUnit.SECONDS; // 时间单位
     public String generateAccessToken(String username) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, username, accessTokenExpiration);
+        String accessToken=doGenerateToken(claims, username, accessTokenExpiration);
+        redisTemplate.opsForValue().set(accessToken,username+"ACCESS_TOKEN");
+        redisTemplate.expire(accessToken,accessTokenExpiration,timeUnit);
+        return accessToken;
     }
 
     public String generateRefreshToken(String username) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, username, refreshTokenExpiration);
+        String refreshToken=doGenerateToken(claims, username, refreshTokenExpiration);
+        redisTemplate.opsForValue().set(refreshToken,username+"REFRESH_TOKEN");
+        redisTemplate.expire(refreshToken,refreshTokenExpiration,timeUnit);
+        return refreshToken;
     }
 
     private String doGenerateToken(Map<String, Object> claims, String username, Long expiration) {

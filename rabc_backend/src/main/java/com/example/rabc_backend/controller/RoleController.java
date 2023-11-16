@@ -1,6 +1,7 @@
 package com.example.rabc_backend.controller;
 
 import com.example.rabc_backend.model.Role;
+import com.example.rabc_backend.note.AuthToken;
 import com.example.rabc_backend.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin
+@AuthToken
 @RestController
 @RequestMapping("/roles")
 @RequiredArgsConstructor

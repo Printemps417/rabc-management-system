@@ -3,6 +3,16 @@ spring:
     url: jdbc:mysql://localhost:3306/rabc
     username: root
     password: 123456
+  redis:
+    host: localhost  # Redis服务器地址
+    port: 6379       # Redis服务器端口
+    password:        # Redis服务器密码，如果有的话
+    jedis:
+      pool:
+        max-active: 10    # 连接池最大连接数
+        max-idle: 5       # 连接池中的最大空闲连接
+        min-idle: 1       # 连接池中的最小空闲连接
+        max-wait: 10000ms # 连接池最大阻塞等待时间
 
 server:
   port: 8088
@@ -12,6 +22,6 @@ mybatis:
 jwt:
   secret: gx4SN/4gh6QPvLfVWCW8Aoo4l2n66d2338IwXyu1koDT1W94XS35OZJPYkA2IIMMgmlz96LCHSNc8jLYuzwB1IreKOZz2TZhsWODfjHAS9bYlduniCUSuSPZ5/OP15O63fn1kN1N5w64frpyWcWbTtiCgLMkJpnfjmqFMAr7fgcOGyt2rmunvFYni9T78Q4fn/0gpx3qm8zXw3oBbFb1Ge9Wnh1UCSapXd/EzLau3iaXqp9f+8FHmSCo9vbEaRSRMPHdcpnB4WKHKySE/BCNSsWM+kHmHyrAbvKErPCz2XXMnIalUoAtquq03LnmYjrBHyI230VcYEVzGmzLOTsSJw==
   access_token:
-    expiration: 3600 # in seconds
+    expiration: 600 # in seconds
   refresh_token:
-    expiration: 604800 # in seconds
+    expiration: 36000 # in seconds

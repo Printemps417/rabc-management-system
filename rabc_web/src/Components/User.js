@@ -88,7 +88,7 @@ const User = () => {
             key: 'operation',
             render: () => <>
                 <a onClick={showModal}>修改</a>
-                <a onClick={showModal2}>——分配角色</a>
+                <a onClick={showModal2}> 分配角色</a>
             </>
         },
     ]

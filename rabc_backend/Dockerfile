@@ -19,3 +19,4 @@ EXPOSE 8088
 
 ## 启动后端项目
 CMD java ${JAVA_OPTS} -jar app.jar $ARGS
+# CMD 指令用于指定容器启动时默认执行的命令。这个命令将在容器运行时执行，覆盖任何通过 docker run 传递的命令。

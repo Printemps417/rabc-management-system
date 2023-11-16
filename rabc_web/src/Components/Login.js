@@ -1,49 +1,50 @@
 import React, { useState, useEffect } from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Button, Checkbox, Form, Input, message } from 'antd'
+import { Button, Checkbox, Form, Input, message, notification } from 'antd'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
-import { getToken, setToken, checkToken } from '../Tools/token'
+import { getAccessToken, setAccessToken, getRefreshToken, setRefreshToken } from '../Tools/token'
+import service from '../Tools/request'
 
 const Login = () => {
     const [redirect, setRedirect] = useState(false)
-    const [flag, setFlag] = useState(false)
-    const headers = {
-        'Authorization': 'Bearer ' + getToken()
-    }
-    axios.get("/api/users/profile/get", { headers })
+
+    service.get("/users/profile/get")
         .then((response) => {
-            console.log(response.data.data)
-            setFlag(Boolean(response.data.data))
+            console.log("用户名为：" + response.data.data)
+            if (Boolean(response.data.data)) {
+                notification.success({
+                    message: '成功',
+                    description: '您已登录！页面即将跳转',
+                    duration: 0.5, // 显示时间 0.5 秒
+                    onClose: () => {
+                        window.location.href = '/welcome/user'
+                    }
+                })
+            }
         })
-    if (flag) {
-        message.success('您已登录！页面即将跳转')
-        return <Navigate to='/welcome/user' replace={true} />
-    }
     if (redirect) {
         return <Navigate to='/welcome/user' replace={true} />
     }
     const onFinish = async (values) => {
-        try {
-            axios.post('/api/users/login', {
-                username: values.username,
-                password: values.password,
-            }).then(response => {
-                if (response.data.data) {
-                    console.log(response.data)
-                    setToken(response.data.data.accessToken)
-                    // Redirect to the welcome page
-                    message.success("登录成功！页面即将跳转")
+        await service.post('/users/login', {
+            username: values.username,
+            password: values.password,
+        }).then(response => {
+            if (response.data.data) {
+                console.log(response.data)
+                setAccessToken(response.data.data.accessToken)
+                setRefreshToken(response.data.data.refreshToken)
+                // Redirect to the welcome page
+                message.success("登录成功！页面即将跳转")
+                setTimeout(() => {
                     setRedirect(true)
-                } else {
-                    // If data is null, login failed
-                    message.error('登录失败！账号密码错误')
-                }
-            })
-        } catch (error) {
-            // Handle any other errors
-            message.error('登录过程中发生错误')
-        }
+                }, 500) // 1000毫秒即1秒
+            } else {
+                // If data is null, login failed
+                message.error('登录失败！账号密码错误')
+            }
+        })
     }
 
     const inputStyle = {

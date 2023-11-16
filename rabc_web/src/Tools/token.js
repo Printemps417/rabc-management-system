@@ -1,36 +1,47 @@
 // 封装token存取操作
 import axios from 'axios'
-const key = 'ACCESS_TOKEN'
-
-const setToken = (token) => {
-    return window.localStorage.setItem(key, token)
+import config from '../Config/config'
+const accesskey = 'ACCESS_TOKEN'
+const refreshkey = 'REFRESH_TOKEN'
+const setAccessToken = (token) => {
+    return window.localStorage.setItem(accesskey, token)
 }
 
-const getToken = () => {
-    return window.localStorage.getItem(key)
+const getAccessToken = () => {
+    return window.localStorage.getItem(accesskey)
 }
-const checkToken = async () => {
+const setRefreshToken = (token) => {
+    return window.localStorage.setItem(refreshkey, token)
+}
+
+const getRefreshToken = () => {
+    return window.localStorage.getItem(refreshkey)
+}
+
+const ReloadToken = () => {
     const headers = {
-        'Authorization': 'Bearer ' + getToken()
+        'REFRESH_TOKEN': getRefreshToken()
     }
-
-    try {
-        const response = await axios.get("/api/users/profile/get", { headers })
-        return Boolean(response.data.data) // Will return true if data exists, false otherwise.
-    } catch (e) {
-        console.error("读取token失败！", e)
-        return false // Return false if an error occurs.
-    }
+    return axios.get(config.baseUrl+"/users/reloadtoken", { headers })
+        .then(res => {
+            console.log(res.data.data)
+            setAccessToken(res.data.data.accessToken)
+            setRefreshToken(res.data.data.refreshToken)
+            console.log("刷新token成功！")
+        })
 }
 
 
 const removeToken = () => {
-    return window.localStorage.removeItem(key)
+    window.localStorage.removeItem(accesskey)
+    window.localStorage.removeItem(refreshkey)
 }
 
 export {
-    setToken,
-    getToken,
+    setAccessToken,
+    setRefreshToken,
+    getAccessToken,
+    getRefreshToken,
     removeToken,
-    checkToken
+    ReloadToken
 }

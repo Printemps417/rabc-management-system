@@ -1,6 +1,7 @@
 package com.example.rabc_backend.controller;
 
 import com.example.rabc_backend.model.Permission;
+import com.example.rabc_backend.note.AuthToken;
 import com.example.rabc_backend.service.PermissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -8,12 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin
+@AuthToken
 @RestController
 @RequestMapping("/permissions")
 @RequiredArgsConstructor
 public class PermissionController {
     private final PermissionService permissionService;
-
+    @AuthToken
     @GetMapping("/")
     public List<Permission> getAllPermissions() {
         return permissionService.getAllPermissions();
