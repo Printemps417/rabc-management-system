@@ -65,7 +65,8 @@ public class UserController {
     }
     @GetMapping("/reloadtoken")
     public CommonResult<?> reloadToken(@RequestHeader("REFRESH_TOKEN") String refreshtoken){
-
+        System.out.println("查询刷新条件……，refreshToken："+refreshtoken);
+        refreshtoken=refreshtoken.substring(7);
         String username=jwtTokenUtil.getUsernameFromToken(refreshtoken);
         if(username.length()>0&&redisTemplate.hasKey(refreshtoken)){
             // 如果token合法，删除旧的访问令牌，生成新的访问令牌，重置刷新令牌的时间

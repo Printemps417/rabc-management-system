@@ -20,7 +20,7 @@ const getRefreshToken = () => {
 
 const ReloadToken = () => {
     const headers = {
-        'REFRESH_TOKEN': getRefreshToken()
+        'REFRESH_TOKEN': 'Bearer ' + getRefreshToken()
     }
     return axios.get(config.baseUrl + "/users/reloadtoken", { headers })
         .then(res => {

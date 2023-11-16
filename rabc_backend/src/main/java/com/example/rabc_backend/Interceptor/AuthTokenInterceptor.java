@@ -53,7 +53,7 @@ public class AuthTokenInterceptor implements HandlerInterceptor {
                 System.out.println("拦截器响应！");
                 // 从请求中获取Access Token
                 String accessToken = request.getHeader("Authorization").substring(7);
-                System.out.println(accessToken);
+//                System.out.println(accessToken);
                 // 验证Access Token
                 if (accessToken != null && redisTemplate.hasKey(accessToken)) {
 //                    redisTemplate.hasKey(accessToken):有该token。这里要验证token
