@@ -8,17 +8,19 @@ import service from '../Tools/request'
 
 const Login = () => {
     const [redirect, setRedirect] = useState(false)
+    if (redirect) {
+        window.location.href = '/welcome/user'
+    }
 
     service.get("/users/profile/get")
         .then((response) => {
             console.log("用户名为：" + response.data.data)
             if (Boolean(response.data.data)) {
                 message.success("您已登录！页面即将跳转")
+                setRedirect(true)
             }
         })
-    if (redirect) {
-        return <Navigate to='/welcome/user' replace={true} />
-    }
+
     const onFinish = async (values) => {
         await service.post('/users/login', {
             username: values.username,
