@@ -13,14 +13,7 @@ const Login = () => {
         .then((response) => {
             console.log("用户名为：" + response.data.data)
             if (Boolean(response.data.data)) {
-                notification.success({
-                    message: '成功',
-                    description: '您已登录！页面即将跳转',
-                    duration: 0.5, // 显示时间 0.5 秒
-                    onClose: () => {
-                        window.location.href = '/welcome/user'
-                    }
-                })
+                message.success("您已登录！页面即将跳转")
             }
         })
     if (redirect) {
@@ -37,9 +30,7 @@ const Login = () => {
                 setRefreshToken(response.data.data.refreshToken)
                 // Redirect to the welcome page
                 message.success("登录成功！页面即将跳转")
-                setTimeout(() => {
-                    setRedirect(true)
-                }, 500) // 1000毫秒即1秒
+                setRedirect(true)
             } else {
                 // If data is null, login failed
                 message.error('登录失败！账号密码错误')
