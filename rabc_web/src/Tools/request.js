@@ -67,22 +67,20 @@ const handleAuthorized = () => {
             .catch(e => {
                 console.log("刷新token失败！RefreshToken有误！")
                 console.log(e)
-                console.log('refresh_token错误！')
-                message.error('会话已过期，请重新登录')
-                // 跳转到登录页
-                if (window.location.pathname != '/login') {
-                    window.location.href = '/login'
-                }
+                handleInvalid()
             })
     } else {
-        console.log('refresh_token错误！')
-        message.error('会话已过期，请重新登录')
-        removeToken()
-        // 跳转到登录页
-        if (window.location.pathname != '/login') {
-            window.location.href = '/login'
-        }
+        handleInvalid()
 
+    }
+}
+const handleInvalid = () => {
+    console.log('refresh_token错误！')
+    message.error('会话已过期，请重新登录')
+    removeToken()
+    // 跳转到登录页
+    if (window.location.pathname != '/login') {
+        window.location.href = '/login'
     }
 }
 

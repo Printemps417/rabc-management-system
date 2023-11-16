@@ -22,7 +22,7 @@ const ReloadToken = () => {
     const headers = {
         'REFRESH_TOKEN': getRefreshToken()
     }
-    return axios.get(config.baseUrl+"/users/reloadtoken", { headers })
+    return axios.get(config.baseUrl + "/users/reloadtoken", { headers })
         .then(res => {
             console.log(res.data.data)
             setAccessToken(res.data.data.accessToken)
