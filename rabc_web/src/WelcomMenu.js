@@ -9,7 +9,10 @@ export const DataContext = createContext()
 
 const { Header, Content, Footer, Sider } = Layout
 const WelcomMenu = () => {
-    const [UserMessage, setUserMessage] = useState("none")
+    const [UserMessage, setUserMessage] = useState({
+        account: "none",
+        password: "none"
+    })
     const [menuitems, setMenuitems] = useState(['系统管理', '基础设施', '支付管理'])
     const [nowlocation, setnowlocation] = useState(['系统管理', '用户管理'])
     const [userdata, setUserdata] = useState([])
@@ -107,7 +110,7 @@ const WelcomMenu = () => {
     })
 
     return (
-        <DataContext.Provider value={{ userdata, roledata, authodata }}>
+        <DataContext.Provider value={{ userdata, roledata, authodata, UserMessage, setUserdata, setRoledata, setAuthodata, setUserMessage }}>
             <Layout
                 theme="dark">
                 <Header

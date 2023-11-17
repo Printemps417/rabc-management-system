@@ -3,19 +3,22 @@ import { Breadcrumb, Layout, Menu, theme, Modal, message } from 'antd'
 import { DatePicker, Input, Button, Row, Col } from 'antd'
 import { Table, Switch } from 'antd'
 import Useradd from './Useradd'
+import Userupdate from './Userupdate'
 import Usergetroles from './Usergetroles'
 import axios from 'axios'
 import { DataContext } from '../WelcomMenu'
+import request from '../Tools/request'
 const { RangePicker } = DatePicker
 const { Header, Content, Footer, Sider } = Layout
 
 
 const User = () => {
-    const [collapsed, setCollapsed] = useState(false)
+    const [UpdateRecord, setUpdateRecord] = useState()
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isModalOpen2, setIsModalOpen2] = useState(false)
+    const [isModalOpen3, setIsModalOpen3] = useState(false)
 
-    const { userdata, roledata, authodata } = useContext(DataContext)
+    const { userdata, roledata, authodata, UserMessage, setUserdata, setRoledata, setAuthodata, setUserMessage } = useContext(DataContext)
     // const userdata = []
 
     const showModal = () => {
@@ -40,9 +43,35 @@ const User = () => {
     const handleCancel2 = () => {
         setIsModalOpen2(false)
     }
+    const showModa3 = (record) => {
+        setUpdateRecord(record)
+        setIsModalOpen3(true)
+    }
+
+    const handleOk3 = () => {
+        setIsModalOpen3(false)
+    }
+
+    const handleCancel3 = () => {
+        setIsModalOpen3(false)
+    }
 
     const onChange = (checked) => {
         console.log(`switch to ${checked}`)
+    }
+    // 修改删除操作的函数
+    const handleDelete = (userId) => {
+        request.delete(`/users/${userId}`)
+            .then(() => {
+                message.success("删除成功")
+
+                // 在删除后更新userdata
+                const updatedUserdata = userdata.filter(user => user.userId !== userId)
+                setUserdata(updatedUserdata)
+            })
+            .catch(() => {
+                message.error("删除失败")
+            })
     }
 
     const columns = [
@@ -86,9 +115,12 @@ const User = () => {
             title: '操作',
             dataIndex: 'operation',
             key: 'operation',
-            render: () => <>
-                <a onClick={showModal}>修改</a>
+            render: (text, record) => <>
+                <a onClick={() => {
+                    showModa3(record)
+                }}>修改</a>
                 <a onClick={showModal2}> 分配角色</a>
+                <a style={{ color: "red" }} onClick={() => handleDelete(record.userId)}> 删除</a>
             </>
         },
     ]
@@ -166,6 +198,9 @@ const User = () => {
                                 </Modal>
                                 <Modal title="分配角色" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
                                     <Usergetroles />
+                                </Modal>
+                                <Modal title="更新用户信息" open={isModalOpen3} onOk={handleOk3} onCancel={handleCancel3}>
+                                    <Userupdate record={UpdateRecord}></Userupdate>
                                 </Modal>
                                 <Button type="primary" style={{ backgroundColor: 'rgba(255, 165, 0, 0.2)', marginRight: '10px', color: 'rgba(255, 165, 0, 1)', borderColor: 'rgba(255, 165, 0, 1)' }}>导入</Button>
                                 <Button type="primary" style={{ backgroundColor: 'rgba(82, 196, 26, 0.2)', color: '#52c41a', borderColor: '#52c41a' }}>导出</Button>

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin
-@AuthToken
+//@AuthToken
 @RestController
 @RequestMapping("/permissions")
 @RequiredArgsConstructor
@@ -36,8 +36,8 @@ public class PermissionController {
         permissionService.updatePermission(permission);
     }
 
-    @DeleteMapping("/{key}")
-    public void deletePermission(@PathVariable String key) {
-        permissionService.deletePermission(key);
+    @DeleteMapping("/{menuName}")
+    public void deletePermission(@PathVariable String menuName) {
+        permissionService.deletePermission(menuName);
     }
 }

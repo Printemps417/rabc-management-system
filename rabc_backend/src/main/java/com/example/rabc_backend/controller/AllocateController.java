@@ -13,7 +13,7 @@ import java.util.Set;
 
 @CrossOrigin
 @RestController
-@AuthToken
+//@AuthToken
 @RequestMapping("/allocate")
 @RequiredArgsConstructor
 public class AllocateController {

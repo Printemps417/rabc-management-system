@@ -4,10 +4,13 @@ import { DataContext } from '../WelcomMenu'
 import request from '../Tools/request'
 const { Option } = Select
 
-const Useradd = () => {
+const Userupdate = ({ record }) => {
     const { userdata, roledata, authodata, UserMessage, setUserdata, setRoledata, setAuthodata, setUserMessage } = useContext(DataContext)
+    console.log("正在更新，record:")
+    console.log(record)
+
     const onFinish = (values) => {
-        console.log("正在提交")
+
         try {
             // 构建请求体
             const requestBody = {
@@ -23,13 +26,15 @@ const Useradd = () => {
             }
 
             // 发送POST请求
-            request.post('/users/', requestBody)
+            request.put('/users/', requestBody)
                 .then((response) => {
-                    message.success("增加成功")
+                    message.success("更新成功")
+                    // const updatedUserdata = userdata.filter(user => user.userId !== values.userId)
+                    // setUserdata(updatedUserdata)
                     // setUserdata([...userdata, requestBody])
                 })
                 .catch(() => {
-                    message.error("增加失败")
+                    message.error("更新失败")
                 })
         } catch (error) {
             console.error('Error:', error)
@@ -42,34 +47,32 @@ const Useradd = () => {
             name="yourForm"
             onFinish={onFinish}
             initialValues={{
-                key: "100",
-                userId: "1234567",
-                status: true,
                 createTime: "2023-10-30T12:00:00Z",
+                account: UserMessage
             }}
         >
             <Form.Item label="Key" name="key">
-                <Input />
+                <Input placeholder={record.key} />
             </Form.Item>
 
             <Form.Item label="User ID" name="userId">
-                <Input />
+                <Input placeholder={record.userId} />
             </Form.Item>
 
             <Form.Item label="User Name" name="userName" rules={[{ required: true, message: 'Please input your username!' }]}>
-                <Input />
+                <Input placeholder={record.userName} />
             </Form.Item>
 
-            <Form.Item label="Nickname" name="nickname" rules={[{ required: true, message: 'Please input your nickname!' }]}>
-                <Input />
+            <Form.Item label="Nickname" name="userNickname" rules={[{ required: true, message: 'Please input your nickname!' }]}>
+                <Input placeholder={record.userNickname} />
             </Form.Item>
 
             <Form.Item label="Department" name="department" rules={[{ required: true, message: 'Please input your department!' }]}>
-                <Input />
+                <Input placeholder={record.department} />
             </Form.Item>
 
             <Form.Item label="Phone Number" name="phoneNumber" rules={[{ required: true, message: 'Please input your phone number!' }]}>
-                <Input />
+                <Input placeholder={record.phoneNumber} />
             </Form.Item>
 
             <Form.Item label="Status" name="status" valuePropName="checked">
@@ -96,4 +99,4 @@ const Useradd = () => {
     )
 }
 
-export default Useradd
+export default Userupdate

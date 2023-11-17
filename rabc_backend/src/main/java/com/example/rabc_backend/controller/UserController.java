@@ -3,6 +3,7 @@ package com.example.rabc_backend.controller;
 import com.example.rabc_backend.mapper.UserMapper;
 import com.example.rabc_backend.model.*;
 import com.example.rabc_backend.note.AuthToken;
+import com.example.rabc_backend.service.AccountService;
 import com.example.rabc_backend.service.UserService;
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +16,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @CrossOrigin
-@AuthToken
+//@AuthToken
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final AccountService accountService;
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
@@ -31,13 +33,13 @@ public class UserController {
     @PostMapping("/login")
     public CommonResult<?> login(@RequestBody LoginRequest loginUser) {
 
-        List<User> users = userService.getUserByAccount(loginUser.getUsername());
+        try{
+            Account account = accountService.getAccountByAccount(loginUser.getUsername());
 
-        if (users.size()==0) {
-            return CommonResult.error(50007,"登录失败，账号密码不正确");
-        }
-        User user=users.get(0);
-        if (!loginUser.getPassword().equals(user.getPassword())) {
+            if (!loginUser.getPassword().equals(account.getPassword())) {
+                return CommonResult.error(50007,"登录失败，账号密码不正确");
+            }
+        }catch (Exception e){
             return CommonResult.error(50007,"登录失败，账号密码不正确");
         }
 
@@ -60,6 +62,7 @@ public class UserController {
         // 解析Authorization请求头中的JWT令牌 Bearer access_token
         String token = authHeader.substring(7);
         String username = jwtTokenUtil.getUsernameFromToken(token);
+
         CommonResult<String> result = CommonResult.success(username);
         return result;
     }

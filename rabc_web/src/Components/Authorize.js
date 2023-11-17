@@ -3,12 +3,17 @@ import { Layout, Input, Button, Row, Col, Table, Switch, Modal, message } from '
 import Authorizeadd from './Authorizeadd'
 import axios from 'axios'
 import { DataContext } from '../WelcomMenu'
-
+import request from '../Tools/request'
+import Authorizeupdate from './Authorizeupdate'
 const { Header, Sider, Content } = Layout
 const Authorize = () => {
-    const [collapsed, setCollapsed] = useState(false)
+    const [UpdateRecord, setUpdateRecord] = useState()
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const { userdata, roledata, authodata } = useContext(DataContext)
+    const [isModalOpen2, setIsModalOpen2] = useState(false)
+    const [isModalOpen3, setIsModalOpen3] = useState(false)
+
+    const { userdata, roledata, authodata, UserMessage, setUserdata, setRoledata, setAuthodata, setUserMessage } = useContext(DataContext)
+    // const userdata = []
 
     const showModal = () => {
         setIsModalOpen(true)
@@ -21,12 +26,48 @@ const Authorize = () => {
     const handleCancel = () => {
         setIsModalOpen(false)
     }
+    const showModal2 = () => {
+        setIsModalOpen2(true)
+    }
+
+    const handleOk2 = () => {
+        setIsModalOpen2(false)
+    }
+
+    const handleCancel2 = () => {
+        setIsModalOpen2(false)
+    }
+    const showModa3 = (record) => {
+        setUpdateRecord(record)
+        setIsModalOpen3(true)
+    }
+
+    const handleOk3 = () => {
+        setIsModalOpen3(false)
+    }
+
+    const handleCancel3 = () => {
+        setIsModalOpen3(false)
+    }
 
     const onChange = (checked) => {
         console.log(`switch to ${checked}`)
     }
 
+    // 修改删除操作的函数
+    const handleDelete = (menuName) => {
+        request.delete(`/permissions/${menuName}`)
+            .then(() => {
+                message.success("删除成功")
 
+                // 在删除后更新userdata
+                const updatedUMenudata = authodata.filter(autho => autho.menuName !== menuName)
+                setAuthodata(updatedUMenudata)
+            })
+            .catch(() => {
+                message.error("删除失败")
+            })
+    }
     const columns = [
         {
             title: '菜单名称',
@@ -63,12 +104,12 @@ const Authorize = () => {
             title: '操作',
             dataIndex: 'operation',
             key: 'operation',
-            render: () =>
-                <>
-                    <a onClick={showModal}>修改</a>
-                    <a onClick={showModal}>  新增</a>
-                    <a style={{ color: "red" }}>  删除</a>
-                </>,
+            render: (text, record) => <>
+                <a onClick={() => {
+                    showModa3(record)
+                }}>修改权限设置</a>
+                <a style={{ color: "red" }} onClick={() => handleDelete(record.menuName)}> 删除</a>
+            </>
         },
     ]
     return (
@@ -98,6 +139,9 @@ const Authorize = () => {
                             </Button>
                             <Modal title="增加权限" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                                 <Authorizeadd />
+                            </Modal>
+                            <Modal title="更新权限" open={isModalOpen3} onOk={handleOk3} onCancel={handleCancel3}>
+                                <Authorizeupdate record={UpdateRecord} />
                             </Modal>
                             <Button type="default" style={{ marginRight: '10px' }}>
                                 展开/折叠

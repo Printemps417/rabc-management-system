@@ -15,10 +15,9 @@ public interface UserMapper {
     @Select("SELECT * FROM users WHERE account = #{account}")
     List<User> getUserByAccount(@Param("account") String account);
 
-
-    @Insert("INSERT INTO users (`key`,userId, userName, userNickname, department, phoneNumber, status, createTime) " +
+    @Insert("INSERT INTO users (`key`,userId, userName, userNickname, department, phoneNumber, status, createTime,account) " +
             "VALUES (#{user.key},#{user.userId}, #{user.userName}, #{user.userNickname}, #{user.department}, #{user.phoneNumber}, " +
-            "#{user.status}, #{user.createTime})")
+            "#{user.status}, #{user.createTime},#{user.account})")
     void insertUser(@Param("user") User user);
 
     @Update("UPDATE users SET userName = #{user.userName}, userNickname = #{user.userNickname}, " +

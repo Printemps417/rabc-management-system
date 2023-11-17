@@ -30,7 +30,7 @@ public class PermissionService {
         permissionMapper.updatePermission(permission);
     }
 
-    public void deletePermission(String key) {
-        permissionMapper.deletePermission(key);
+    public void deletePermission(String menuName) {
+        permissionMapper.deletePermission(menuName);
     }
 }

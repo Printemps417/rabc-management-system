@@ -24,6 +24,6 @@ public interface PermissionMapper {
             "WHERE `key` = #{permission.key}")
     void updatePermission(@Param("permission") Permission permission);
 
-    @Delete("DELETE FROM permissions WHERE `key` = #{key}")
-    void deletePermission(@Param("key") String key);
+    @Delete("DELETE FROM permissions WHERE `menuName` = #{menuName}")
+    void deletePermission(@Param("menuName") String menuName);
 }

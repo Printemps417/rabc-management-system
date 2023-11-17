@@ -65,6 +65,7 @@ const handleAuthorized = () => {
         // 如果有refreshToken且无accesstoken，则刷新token
         ReloadToken()
             .then(() => {
+                // Reload后刷新页面
                 window.location.reload()
             })
             .catch(e => {

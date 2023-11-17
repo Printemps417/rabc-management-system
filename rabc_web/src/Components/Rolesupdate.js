@@ -1,12 +1,12 @@
-import React from 'react'
-import { Form, Input, Select, Button, message, Switch } from 'antd'
+import React, { useContext } from 'react'
+import { Form, Input, Switch, Button, message } from 'antd'
+import { DataContext } from '../WelcomMenu'
 import request from '../Tools/request'
 
-const { Option } = Select
-
-const Rolesadd = () => {
+const Rolesupdate = ({ record }) => {
+    const { roledata, setRoledata } = useContext(DataContext)
+    console.log(record)
     const onFinish = (values) => {
-        console.log("正在提交")
         try {
             // 构建请求体
             const requestBody = {
@@ -21,14 +21,16 @@ const Rolesadd = () => {
                 createTime: values.createTime,
             }
 
-            // 发送 POST 请求
-            request.post('/roles/', requestBody)
+            // 发送 PUT 请求
+            request.put(`/roles/`, requestBody)
                 .then((response) => {
-                    message.success("角色添加成功")
-                    // 更新 roledata，根据实际需要修改
+                    message.success("角色更新成功")
+                    // 在实际应用中，根据需要更新 roledata
+                    // const updatedRoledata = roledata.map(role => (role.roleId === values.roleId ? requestBody : role))
+                    // setRoledata(updatedRoledata)
                 })
                 .catch(() => {
-                    message.error("角色添加失败")
+                    message.error("角色更新失败")
                 })
         } catch (error) {
             console.error('Error:', error)
@@ -41,43 +43,40 @@ const Rolesadd = () => {
             name="yourForm"
             onFinish={onFinish}
             initialValues={{
-                key: "default",
-                roleId: "default",
-                status: true,
-                createTime: "2023-10-16",
+                createTime: "2023-10-16", // 根据实际数据结构修改
             }}
         >
             {/* 根据 role 数据的结构，添加相应的 Form.Item */}
             <Form.Item label="Key" name="key">
-                <Input />
+                <Input placeholder={record.key} />
             </Form.Item>
 
             <Form.Item label="Role ID" name="roleId">
-                <Input />
+                <Input placeholder={record.roleId} />
             </Form.Item>
 
             <Form.Item label="Role Name" name="roleName" rules={[{ required: true, message: '请输入角色名称!' }]}>
-                <Input />
+                <Input placeholder={record.roleName} />
             </Form.Item>
 
             <Form.Item label="Role Type" name="roleType" rules={[{ required: true, message: '请输入角色类型!' }]}>
-                <Input />
+                <Input placeholder={record.roleType} />
             </Form.Item>
 
             <Form.Item label="Role Identifier" name="roleIdentifier" rules={[{ required: true, message: '请输入角色标识!' }]}>
-                <Input />
+                <Input placeholder={record.roleIdentifier} />
             </Form.Item>
 
             <Form.Item label="Display Order" name="displayOrder" rules={[{ required: true, message: '请输入显示顺序!' }]}>
-                <Input type="number" />
+                <Input type="number" placeholder={record.displayOrder} />
             </Form.Item>
 
             <Form.Item label="Remark" name="remark">
-                <Input />
+                <Input placeholder={record.remark} />
             </Form.Item>
 
             <Form.Item label="Status" name="status" valuePropName="checked">
-                <Switch />
+                <Switch defaultChecked={record.status} />
             </Form.Item>
 
             <Form.Item label="Create Time" name="createTime">
@@ -97,4 +96,4 @@ const Rolesadd = () => {
     )
 }
 
-export default Rolesadd
+export default Rolesupdate

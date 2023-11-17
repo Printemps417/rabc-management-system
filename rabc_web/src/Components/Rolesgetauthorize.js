@@ -11,7 +11,7 @@ const { Option } = Select
 
 const Rolesgetauthorize = () => {
 
-    const { userdata, roledata, authodata } = useContext(DataContext)
+    const { userdata, roledata, authodata, UserMessage, setUserdata, setRoledata, setAuthodata, setUserMessage } = useContext(DataContext)
     const [checkedList, setCheckedList] = useState([])
 
     const onFinish = (values) => {
