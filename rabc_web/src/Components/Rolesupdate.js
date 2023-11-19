@@ -10,15 +10,15 @@ const Rolesupdate = ({ record }) => {
         try {
             // 构建请求体
             const requestBody = {
-                key: values.key,
-                roleId: values.roleId,
+                key: record.key,
+                roleId: record.roleId,
                 roleName: values.roleName,
                 roleType: values.roleType,
                 roleIdentifier: values.roleIdentifier,
                 displayOrder: values.displayOrder,
                 remark: values.remark,
                 status: values.status,
-                createTime: values.createTime,
+                createTime: record.createTime,
             }
 
             // 发送 PUT 请求
@@ -48,11 +48,11 @@ const Rolesupdate = ({ record }) => {
         >
             {/* 根据 role 数据的结构，添加相应的 Form.Item */}
             <Form.Item label="Key" name="key">
-                <Input placeholder={record.key} />
+                <Input placeholder={record.key} disabled />
             </Form.Item>
 
             <Form.Item label="Role ID" name="roleId">
-                <Input placeholder={record.roleId} />
+                <Input placeholder={record.roleId} disabled />
             </Form.Item>
 
             <Form.Item label="Role Name" name="roleName" rules={[{ required: true, message: '请输入角色名称!' }]}>

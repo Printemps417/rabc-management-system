@@ -14,14 +14,14 @@ const Userupdate = ({ record }) => {
         try {
             // 构建请求体
             const requestBody = {
-                key: values.key,
-                userId: values.userId,
+                key: record.key,
+                userId: record.userId,
                 userName: values.userName,
                 userNickname: values.userNickname,
                 department: values.department,
                 phoneNumber: values.phoneNumber,
                 status: values.status,
-                createTime: "2023-10-30T12:00:00Z",
+                createTime: record.createTime,
                 account: UserMessage
             }
 
@@ -47,16 +47,18 @@ const Userupdate = ({ record }) => {
             name="yourForm"
             onFinish={onFinish}
             initialValues={{
+                // key: record.key,
+                // userId: record.userId,
                 createTime: "2023-10-30T12:00:00Z",
-                account: UserMessage
+                account: record.account
             }}
         >
             <Form.Item label="Key" name="key">
-                <Input placeholder={record.key} />
+                <Input placeholder={record.key} disabled />
             </Form.Item>
 
             <Form.Item label="User ID" name="userId">
-                <Input placeholder={record.userId} />
+                <Input placeholder={record.userId} disabled />
             </Form.Item>
 
             <Form.Item label="User Name" name="userName" rules={[{ required: true, message: 'Please input your username!' }]}>
@@ -80,11 +82,11 @@ const Userupdate = ({ record }) => {
             </Form.Item>
 
             <Form.Item label="Create Time" name="createTime">
-                <Input disabled />
+                <Input placeholder={record.createTime} disabled />
             </Form.Item>
 
             <Form.Item label="Account" name={['account', 'placeholder']}>
-                <Input disabled />
+                <Input placeholder={UserMessage} disabled />
             </Form.Item>
             <Form.Item>
                 <Button type="primary" htmlType="submit"

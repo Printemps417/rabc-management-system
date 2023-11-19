@@ -11,8 +11,8 @@ const Authorizeupdate = ({ record }) => {
         try {
             // 构建请求体
             const requestBody = {
-                key: values.key,
-                menuName: values.menuName,
+                key: record.key,
+                menuName: record.menuName,
                 icon: values.icon,
                 permission: values.permission,
                 componentPath: values.componentPath,
@@ -46,8 +46,8 @@ const Authorizeupdate = ({ record }) => {
                 <Input disabled placeholder={record.key} />
             </Form.Item>
 
-            <Form.Item label="Menu Name" name="menuName" rules={[{ required: true, message: '请输入菜单名称!' }]}>
-                <Input placeholder={record.menuName} />
+            <Form.Item label="Menu Name" name="menuName" rules={[{ message: '请输入菜单名称!' }]}>
+                <Input placeholder={record.menuName} disabled />
             </Form.Item>
 
             <Form.Item label="Icon" name="icon" rules={[{ required: true, message: '请输入图标!' }]}>

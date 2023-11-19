@@ -22,7 +22,7 @@ public interface UserMapper {
 
     @Update("UPDATE users SET userName = #{user.userName}, userNickname = #{user.userNickname}, " +
             "department = #{user.department}, phoneNumber = #{user.phoneNumber}, status = #{user.status}, " +
-            "createTime = #{user.createTime} WHERE userId = #{user.userId}")
+            "createTime = #{user.createTime} ,account=#{user.account} WHERE userId = #{user.userId}")
     void updateUser(@Param("user") User user);
 
     @Delete("DELETE FROM users WHERE userId = #{userId}")

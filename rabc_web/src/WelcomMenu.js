@@ -182,6 +182,7 @@ const WelcomMenu = () => {
                                 style={{
                                     height: '100%',
                                 }}
+
                                 items={items2}
                                 theme='light'
                             />
