@@ -67,7 +67,7 @@ public class UserController {
         return result;
     }
     @GetMapping("/reloadtoken")
-    public CommonResult<?> reloadToken(@RequestHeader("REFRESH_TOKEN") String refreshtoken){
+    public CommonResult<?> reloadToken(@RequestHeader("REFRESHTOKEN") String refreshtoken){
         System.out.println("查询刷新条件……，refreshToken："+refreshtoken);
         refreshtoken=refreshtoken.substring(7);
         String username=jwtTokenUtil.getUsernameFromToken(refreshtoken);

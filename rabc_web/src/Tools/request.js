@@ -14,7 +14,7 @@ const request = axios.create({
     // 禁用 Cookie 等信息
     withCredentials: false,
     headers: {
-        'Authorization': 'Bearer ' + getAccessToken()
+        Authorization: 'Bearer ' + getAccessToken()
     }
 })
 
