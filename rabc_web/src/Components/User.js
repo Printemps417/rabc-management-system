@@ -8,6 +8,7 @@ import Usergetroles from './Usergetroles'
 import axios from 'axios'
 import { DataContext } from '../WelcomMenu'
 import request from '../Tools/request'
+import { getRefreshToken } from '../Tools/token'
 const { RangePicker } = DatePicker
 const { Header, Content, Footer, Sider } = Layout
 
@@ -205,7 +206,11 @@ const User = () => {
                                 <Modal title="更新用户信息" open={isModalOpen3} onOk={handleOk3} onCancel={handleCancel3}>
                                     <Userupdate record={UpdateRecord}></Userupdate>
                                 </Modal>
-                                <Button type="primary" style={{ backgroundColor: 'rgba(255, 165, 0, 0.2)', marginRight: '10px', color: 'rgba(255, 165, 0, 1)', borderColor: 'rgba(255, 165, 0, 1)' }}>导入</Button>
+                                <Button type="primary"
+                                    onClick={() => {
+                                        message.info(getRefreshToken())
+                                    }}
+                                    style={{ backgroundColor: 'rgba(255, 165, 0, 0.2)', marginRight: '10px', color: 'rgba(255, 165, 0, 1)', borderColor: 'rgba(255, 165, 0, 1)' }}>导入</Button>
                                 <Button type="primary" style={{ backgroundColor: 'rgba(82, 196, 26, 0.2)', color: '#52c41a', borderColor: '#52c41a' }}>导出</Button>
                             </Col>
                         </Row>
