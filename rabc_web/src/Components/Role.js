@@ -30,7 +30,8 @@ const Role = () => {
     const handleCancel = () => {
         setIsModalOpen(false)
     }
-    const showModal2 = () => {
+    const showModal2 = (record) => {
+        setUpdateRecord(record)
         setIsModalOpen2(true)
     }
 
@@ -122,7 +123,7 @@ const Role = () => {
                     <a onClick={() => {
                         showModa3(record)
                     }}>编辑</a>
-                    <a onClick={showModal2} > 菜单权限</a>
+                    <a onClick={() => { showModal2(record) }} > 菜单权限</a>
                     <a > 数据权限</a>
                     <a style={{ color: "red" }} onClick={() => handleDelete(record.roleId)}>  删除</a>
                 </>,
@@ -179,7 +180,7 @@ const Role = () => {
                                 <Rolesadd />
                             </Modal>
                             <Modal title="分配权限" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
-                                <Rolesgetauthorize />
+                                <Rolesgetauthorize record={UpdateRecord} />
                             </Modal>
                             <Modal title="更新角色" open={isModalOpen3} onOk={handleOk3} onCancel={handleCancel3}>
                                 <Rolesupdate record={UpdateRecord} />

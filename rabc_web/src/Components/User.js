@@ -32,7 +32,8 @@ const User = () => {
     const handleCancel = () => {
         setIsModalOpen(false)
     }
-    const showModal2 = () => {
+    const showModa2 = (record) => {
+        setUpdateRecord(record)
         setIsModalOpen2(true)
     }
 
@@ -119,7 +120,9 @@ const User = () => {
                 <a onClick={() => {
                     showModa3(record)
                 }}>修改</a>
-                <a onClick={showModal2}> 分配角色</a>
+                <a onClick={() => {
+                    showModa2(record)
+                }}> 分配角色</a>
                 <a style={{ color: "red" }} onClick={() => handleDelete(record.userId)}> 删除</a>
             </>
         },
@@ -197,7 +200,7 @@ const User = () => {
                                     <Useradd />
                                 </Modal>
                                 <Modal title="分配角色" open={isModalOpen2} onOk={handleOk2} onCancel={handleCancel2}>
-                                    <Usergetroles />
+                                    <Usergetroles record={UpdateRecord} />
                                 </Modal>
                                 <Modal title="更新用户信息" open={isModalOpen3} onOk={handleOk3} onCancel={handleCancel3}>
                                     <Userupdate record={UpdateRecord}></Userupdate>
