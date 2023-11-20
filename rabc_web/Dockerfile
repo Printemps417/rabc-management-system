@@ -4,7 +4,7 @@ FROM node:16-alpine as build-stage
 # 设置工作目录
 WORKDIR /app
 
-# 复制package.json和package-lock.json文件到容器中
+# 复制.npmrc,package.json和package-lock.json文件到容器中
 COPY .npmrc package.json package-lock.json ./
 
 # 安装项目依赖

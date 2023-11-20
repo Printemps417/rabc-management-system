@@ -1,5 +1,5 @@
 FROM eclipse-temurin:8-jre
-
+# 创建工作目录
 RUN mkdir -p /rabc_backend
 WORKDIR /rabc_backend
 
@@ -15,6 +15,7 @@ ENV JAVA_OPTS="-Xms512m -Xmx512m -Djava.security.egd=file:/dev/./urandom"
 ## 应用参数
 ENV ARGS=""
 
+# 端口8088
 EXPOSE 8088
 
 ## 启动后端项目

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @CrossOrigin
-//@AuthToken
+@AuthToken
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
