@@ -5,4 +5,4 @@ const config = {
     // baseUrl: '/api'
 }
 
-// export default config
+export default config
