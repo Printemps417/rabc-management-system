@@ -66,7 +66,8 @@ const handleAuthorized = () => {
         ReloadToken()
             .then(() => {
                 // Reload后刷新页面
-                window.location.reload()
+                console.log("ACCESS_TOKEN已过期，REFRESH_TOKEN为：", getRefreshToken())
+                // window.location.reload()
             })
             .catch(e => {
                 console.log("刷新token失败！RefreshToken有误！")
@@ -75,7 +76,6 @@ const handleAuthorized = () => {
             })
     } else {
         handleInvalid()
-
     }
 }
 const handleInvalid = () => {
