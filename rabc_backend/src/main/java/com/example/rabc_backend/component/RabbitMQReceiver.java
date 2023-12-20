@@ -5,6 +5,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class RabbitMQReceiver {
     @Autowired
@@ -17,7 +19,8 @@ public class RabbitMQReceiver {
 
     @RabbitListener(queues = "lessons")
     public void receive(int lessonId) {
+        System.out.println("lesson"+lessonId+"消息响应 "+new Date());
         lessonMapper.enrollInLessonById(lessonId);
-        System.out.println("lesson"+lessonId+"选课成功");
+        System.out.println("lesson"+lessonId+"选课成功 "+new Date());
     }
 }

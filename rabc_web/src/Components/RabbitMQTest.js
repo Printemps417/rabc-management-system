@@ -5,19 +5,18 @@ import request from '../Tools/request'
 const { Header, Sider, Content } = Layout
 const RabbitMQTest = () => {
     const [courses, setCourses] = useState([])
-
+    const fetchCourses = () => {
+        request.get('/lessons')
+            .then((res) => {
+                // console.log(res)
+                setCourses(res.data)
+            })
+            .catch((error) => {
+                // 处理错误
+                console.error('Error fetching courses:', error)
+            })
+    }
     useEffect(() => {
-        const fetchCourses = () => {
-            request.get('/lessons')
-                .then((res) => {
-                    // console.log(res)
-                    setCourses(res.data)
-                })
-                .catch((error) => {
-                    // 处理错误
-                    console.error('Error fetching courses:', error)
-                })
-        }
         fetchCourses()
     }, [])
 
@@ -40,6 +39,7 @@ const RabbitMQTest = () => {
                 else {
                     message.error("选课失败！人数超过上限")
                 }
+                fetchCourses()
             })
             .catch((error) => {
                 // 处理错误

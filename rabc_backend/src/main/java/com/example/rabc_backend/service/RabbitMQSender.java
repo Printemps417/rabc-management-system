@@ -20,7 +20,7 @@ public class RabbitMQSender {
     }
 
     public void ChooseLesson(int id){
-        System.out.println("选课 : " + id);
+        System.out.println("选课 : " + id+"加入队列");
         rabbitTemplate.convertAndSend("lessons",id);
     }
 }
