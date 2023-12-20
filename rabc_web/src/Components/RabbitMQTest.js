@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, List, Card, Col, Row, Layout, Table } from 'antd'
+import { Button, List, Card, Col, Row, Layout, Table, message } from 'antd'
 import axios from 'axios'
 import request from '../Tools/request'
 const { Header, Sider, Content } = Layout
@@ -31,9 +31,15 @@ const RabbitMQTest = () => {
             maxnum: record.maxnum
         }
         console.log(record)
-        request.post("/lessons/choose", requestBody)
+        request.post("/lessons/enroll", requestBody)
             .then((res) => {
                 console.log(res.data)
+                if (res.data == "选课成功") {
+                    message.success("选课成功！")
+                }
+                else {
+                    message.error("选课失败！人数超过上限")
+                }
             })
             .catch((error) => {
                 // 处理错误

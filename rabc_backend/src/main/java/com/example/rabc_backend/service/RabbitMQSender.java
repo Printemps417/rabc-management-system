@@ -19,8 +19,8 @@ public class RabbitMQSender {
         rabbitTemplate.convertAndSend("hello", context);
     }
 
-    public void ChooseLesson(String lesson_name){
-        System.out.println("选课 : " + lesson_name);
-        rabbitTemplate.convertAndSend("lessons",lesson_name);
+    public void ChooseLesson(int id){
+        System.out.println("选课 : " + id);
+        rabbitTemplate.convertAndSend("lessons",id);
     }
 }
