@@ -49,6 +49,7 @@ services:
         --spring.datasource.username=${DATASOURCE_USERNAME:-root}
         --spring.datasource.password=${DATASOURCE_PASSWORD:-123456}
         --spring.redis.host=${REDIS_HOST:-rabc-redis}
+        # 指定redis地址的host
     depends_on:
       - mysql
       - redis

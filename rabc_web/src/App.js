@@ -6,6 +6,7 @@ import Authorize from './Components/Authorize'
 import WelcomMenu from './WelcomMenu'
 import Login from './Components/Login'
 import NotFoundPage from './Components/NotFoundPage'
+import RabbitMQTest from './Components/RabbitMQTest'
 
 const App = () => {
 
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/welcome/user" element={<User />}></Route>
           <Route path="/welcome/role" element={<Role />}></Route>
           <Route path="/welcome/authorize" element={<Authorize />}></Route>
+          <Route path="/welcome/rabbit" element={<RabbitMQTest />}></Route>
         </Route>
         <Route element={<NotFoundPage />}></Route>
       </Routes>

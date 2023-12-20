@@ -77,8 +77,8 @@ const WelcomMenu = () => {
         token: { colorBgContainer },
     } = theme.useToken()
 
-    const items1 = ['用户管理', '角色管理', '权限管理']
-    const linklist = ['/welcome/user', '/welcome/role', '/welcome/authorize']
+    const items1 = ['用户管理', '角色管理', '权限管理', '选课']
+    const linklist = ['/welcome/user', '/welcome/role', '/welcome/authorize', '/welcome/rabbit']
     const itemList = [UserOutlined, LaptopOutlined, NotificationOutlined]
     const items2 = menuitems.map((menuitem, index) => {
         const key = String(index + 1)
@@ -86,8 +86,8 @@ const WelcomMenu = () => {
             key: `sub${key}`,
             icon: React.createElement(itemList[index % 3]),
             label: menuitem,
-            children: new Array(3).fill(null).map((_, j) => {
-                const subKey = index * 3 + j + 1
+            children: new Array(4).fill(null).map((_, j) => {
+                const subKey = index * 4 + j + 1
                 return {
                     key: subKey,
                     label: <Link

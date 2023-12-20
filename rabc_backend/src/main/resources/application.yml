@@ -3,10 +3,29 @@ spring:
     url: jdbc:mysql://localhost:3306/rabc
     username: root
     password: 123456
+    datasource:
+      url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
+    jpa:
+      hibernate:
+        ddl-auto: create-drop
+      show-sql: true
+    h2:
+      console:
+        enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user01
+    password: 123456
   redis:
     host: localhost  # Redis服务器地址
     port: 6379       # Redis服务器端口
     password:        # Redis服务器密码，如果有的话
+
+#    在部署时在docker-compose的args中修改配置文件
     jedis:
       pool:
         max-active: 10    # 连接池最大连接数
